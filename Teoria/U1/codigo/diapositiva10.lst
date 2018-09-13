@@ -1,0 +1,178 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program diapositiva10;
+    2     0 
+    3     0 function sumar(a, b:integer):integer;
+    4     0 begin
+    5     0         sumar:=a+b;
+    6     5 end;
+    7     6 
+    8     6 function multiplicar(a, b:integer):integer;
+    9     6 begin
+   10     6         multiplicar:=a*b;
+   11    11 end;
+   12    12 
+   13    12 process type mescalar (v1: array of integer, v2 : array of integer);
+***********                                ^ 2 --------           ^ 2 -------- ^ 8 
+   14    12 var 
+   15    12         i : integer;
+***********                   ^ 3 
+   16    12 begin
+   17    12         if (length(v1) = length(v2)) then
+***********                  ^ 0          ^ 0 
+   18    18         begin
+   19    18                 for i := 0 to length(v1) do
+***********                                    ^ 0 
+   20    23                    res := res + multiplicar(v1[i], v2[i]);
+***********                      ^ 0 ---------------------------------
+   21    24         end
+   22    24         else writeln('El tamanio de los vectores debe ser igual');
+   23    28 end;
+   24    29 
+   25    29 var
+   26    29         res : integer ;
+   27    29         p1 : mescalar ;
+   28    29         p2 : mescalar ;
+   29    29         p3 : mescalar ;
+   30    29         p4 : mescalar ;
+   31    29 begin
+   32    29         res := 0;
+   33    32         cobegin
+   34    33                 res := res + p1([1,2],[3,4]);
+***********                                ^28   ^28    ^ 3 
+   35    46                 res := res + p2([5,6],[7,8]);
+***********                                ^28   ^28    ^ 3 
+   36    59                 res := res + p3([9,10],[11,12]);
+***********                                ^28    ^28      ^ 3 
+   37    72                 res := res + p4([13,14],[15,16]);
+***********                                ^28     ^28      ^ 3 
+   38    85         coend;
+   39    86 end.
+
+Error codes found
+
+  Error 0: undeclared identifier
+  Error 2: identifier expected
+  Error 3: type error
+  Error 8: ':' expected
+  Error 28: unexpected symbol
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0   29    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   function    integer         3    TRUE    1    0    0  sumar
+ 59     0   variable    integer         0    TRUE    2    5    0  a
+ 60    59   variable    integer         0    TRUE    2    6    0  b
+ 61    58   function    integer         4    TRUE    1    6    0  multiplicar
+ 62     0   variable    integer         0    TRUE    2    5    0  a
+ 63    62   variable    integer         0    TRUE    2    6    0  b
+ 64    61   type id     process         5    TRUE    1   12    0  mescalar
+ 65     0   variable    notyp           0    TRUE    2    5    0  v1
+ 66    65   variable    notyp           0    TRUE    2    5    0  integer
+ 67    66   variable    notyp           0    TRUE    2    5    0  v2
+ 68    67   variable    notyp           0    TRUE    2    5    0  i
+ 69    64   variable    integer         0    TRUE    1    5    0  res
+ 70    69   variable    process         5    TRUE    1    6    0  p1
+ 71    70   variable    process         5    TRUE    1    7    0  p2
+ 72    71   variable    process         5    TRUE    1    8    0  p3
+ 73    72   variable    process         5    TRUE    1    9    0  p4
+
+Generated P-code
+
+    0     ldadr        2         0 ; 4
+    1     ldval.i      2         5 ; 5
+    2     ldval.i      2         6 ; 5
+    3     add  .i      0         0 ; 5
+    4     store.i      0         0 ; 5
+    5     retfn.i      0         0 ; 5
+    6     ldadr        2         0 ; 9
+    7     ldval.i      2         5 ; 10
+    8     ldval.i      2         6 ; 10
+    9     mul  .i      0         0 ; 10
+   10     store.i      0         0 ; 10
+   11     retfn.i      0         0 ; 10
+   12     ldval        0         0 ; 17
+   13     ldval        2         5 ; 17
+   14     ldval        0         0 ; 17
+   15     ldval        2         5 ; 17
+   16     releq        0         0 ; 17
+   17     jmpiz        0        25 ; 17
+   18     ldadr        2         5 ; 18
+   19     ldcon.i      0         0 ; 19
+   20     ldval        0         0 ; 19
+   21     ldval        2         5 ; 19
+   22     for1u        0        24 ; 19
+   23     for2u        0        23 ; 20
+   24     jmp          0        28 ; 21
+   25     ldcon.i      0        41 ; 22
+   26     wrstr        0         0 ; 22
+   27     wrlin        0         0 ; 22
+   28     rproc        1         0 ; 22
+   29     ldadr        1         5 ; 31
+   30     ldcon.i      0         0 ; 32
+   31     store.i      0         0 ; 32
+   32     cobeg        0         0 ; 32
+   33     ldadr        1         5 ; 33
+   34     ldval.i      1         5 ; 34
+   35     ldadr        1         6 ; 34
+   36     ldcon.i      0         1 ; 34
+   37     powr2        0         0 ; 34
+   38     ldcon.i      0         2 ; 34
+   39     powr2        0         0 ; 34
+   40     orop .bs     0         0 ; 34
+   41     ldcon.i      0         3 ; 34
+   42     powr2        0         0 ; 34
+   43     ldcon.i      0         4 ; 34
+   44     powr2        0         0 ; 34
+   45     orop .bs     0         0 ; 34
+   46     ldadr        1         5 ; 34
+   47     ldval.i      1         5 ; 35
+   48     ldadr        1         7 ; 35
+   49     ldcon.i      0         5 ; 35
+   50     powr2        0         0 ; 35
+   51     ldcon.i      0         6 ; 35
+   52     powr2        0         0 ; 35
+   53     orop .bs     0         0 ; 35
+   54     ldcon.i      0         7 ; 35
+   55     powr2        0         0 ; 35
+   56     ldcon.i      0         8 ; 35
+   57     powr2        0         0 ; 35
+   58     orop .bs     0         0 ; 35
+   59     ldadr        1         5 ; 35
+   60     ldval.i      1         5 ; 36
+   61     ldadr        1         8 ; 36
+   62     ldcon.i      0         9 ; 36
+   63     powr2        0         0 ; 36
+   64     ldcon.i      0        10 ; 36
+   65     powr2        0         0 ; 36
+   66     orop .bs     0         0 ; 36
+   67     ldcon.i      0        11 ; 36
+   68     powr2        0         0 ; 36
+   69     ldcon.i      0        12 ; 36
+   70     powr2        0         0 ; 36
+   71     orop .bs     0         0 ; 36
+   72     ldadr        1         5 ; 36
+   73     ldval.i      1         5 ; 37
+   74     ldadr        1         9 ; 37
+   75     ldcon.i      0        13 ; 37
+   76     powr2        0         0 ; 37
+   77     ldcon.i      0        14 ; 37
+   78     powr2        0         0 ; 37
+   79     orop .bs     0         0 ; 37
+   80     ldcon.i      0        15 ; 37
+   81     powr2        0         0 ; 37
+   82     ldcon.i      0        16 ; 37
+   83     powr2        0         0 ; 37
+   84     orop .bs     0         0 ; 37
+   85     coend        0         0 ; 37
+   86     stop         0         0 ; 38
