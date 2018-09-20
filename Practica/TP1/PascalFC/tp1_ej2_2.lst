@@ -1,0 +1,55 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program tp1_ej2;
+    2     0 
+    3     0 process type print (id : integer);
+    4     0         begin
+    5     0                 write( 'ID de proceso: ', id);
+    6     4         end;
+    7     5 var
+    8     5         p1, p2 : print ;
+    9     5 begin
+   10     5         cobegin
+   11     6                 p1 (1) ;
+   12    11                 p2 (2) ;
+   13    16         coend;
+   14    17 end.
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0    5    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   type id     process         3    TRUE    1    0    0  print
+ 59     0   variable    integer         0    TRUE    2    5    0  id
+ 60    58   variable    process         3    TRUE    1    5    0  p1
+ 61    60   variable    process         3    TRUE    1    6    0  p2
+
+Generated P-code
+
+    0     ldcon.i      0        15 ; 5
+    1     wrstr        0         0 ; 5
+    2     ldval.i      2         5 ; 5
+    3     wrval.i      0         0 ; 5
+    4     rproc        1         0 ; 5
+    5     cobeg        0         0 ; 8
+    6     mrkst        1        58 ; 10
+    7     ldadr        1         5 ; 10
+    8     procv        0         0 ; 10
+    9     ldcon.i      0         1 ; 11
+   10     calls        1         5 ; 11
+   11     mrkst        1        58 ; 11
+   12     ldadr        1         6 ; 11
+   13     procv        0         0 ; 11
+   14     ldcon.i      0         2 ; 12
+   15     calls        1         5 ; 12
+   16     coend        0         0 ; 12
+   17     stop         0         0 ; 13

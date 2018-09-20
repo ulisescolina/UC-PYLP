@@ -1,0 +1,82 @@
+\documentclass{article}
+\renewcommand\refname{Referencias}
+\renewcommand\contentsname{\'Indice de Conten\'ido}
+\usepackage{graphicx}
+\graphicspath{{IMG/}}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{listings}
+%\lstset{basicstyle=\ttfamily,
+ % showstringspaces=false,
+%}
+
+\title{\textsc{Paradigmas y Lenguajes de Programaci\'on\\Trabajo Pr\'actico N\'umero 1\\Pr\'actica}}
+\author{Ulises C. Ramirez [uli.r19@gmail.com]\\H\'ector Chripczuk\\Ver\'onica Gonzalez}
+\date{14 de Septiembre, 2018}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+\newpage
+
+\section*{C\'odigo}
+Todo el c\'odigo que est\'e expresado en el documento como respuesta a alg\'un ejercicio esta contenido en la carpeta \texttt{PascalFC}, junto con el archivo \texttt{*.lst} y el correspondiente \texttt{*.obj}.\\
+
+\section*{Versionado}
+Para el corriente documento se est\'a llevando un versionado a fin de mantener un respaldo del trabajo y adem\'as proveer a la c\'atedra o a cualquier interesado la posibilidad de leer el material en la \'ultima versi\'on disponible.\\
+
+\begin{center}
+  \textsc{Repositorio}: \textit{https://github.com/ulisescolina/UC-PYLP/}
+\end{center}
+
+\hfill--\textsc{Ulises}
+\tableofcontents
+\pagenumbering{gobble}
+\newpage
+
+% === Inicio del Cuerpo del Documento === %
+\pagenumbering{arabic}
+\section{Instalaci\'on PascalFC}
+\label{sec:pascalfc}
+\textsc{Consigna}: \textbf{Investigar y describir como instalar el lenguaje PascalFC en su sistema operativo. Lectura recomendada por la c\'atedra: p\'agina del Ing. John Coppens, \textit{http://jcoppens.com/soft/pfc2}}.\\
+
+\textit{Descripci\'on de la instalaci\'on}: la descripci\'on a brindar se realiza en una m\'aquina con las siguientes caracter\'isticas:\\
+
+\begin{lstlisting}[caption={Caracter\'isticas sistema}]
+~$ uname --kernel-name --kernel-release --machine
+    --operating-system
+Linux 4.15.0-34-generic x86_64 GNU/Linux
+~$
+\end{lstlisting}
+
+para iniciar con la instalaci\'on se sigui\'o el v\'inculo a la p\'agina del Ing. John Coppens en el apartado de descargas [http://jcoppens.com/soft/pfc2/download.php], luego se procedi\'o a descargar la ultima versi\'on de la compilaci\'on del \texttt{pfc2}, que para el d\'ia 16 de Septiembre del 2018 es \texttt{pfc2-0.9.40.x86\_64.tar.gz}. Con el archivo comprimido descargado, solamente es necesario descomprimirlo en alguna carpeta que tengamos a mano, y despues de eso utilizar los dos archivos que son el resultado de la compilaci\'on del PascalFC, \texttt{pfc2} y el \texttt{pfc2int}, ah\'i tendremos el compilador e int\'erprete.\\
+
+Finalizados estos pasos ya tendremos instalado el PascalFC, para la compilaci\'on y ejecuci\'on ser\'a necesario realizar en consola los siguientes pasos:
+
+\begin{lstlisting}[caption={Compilaci\'on de y ejecuci\'on con pfc2}]
+~$ cd /ruta/en/la/que/se/descomprimio/la/descarga/
+~$ ./pfc2 archivo_a_ser_compilado.pfc
+** Sucede la compilacion **
+~$ ./pfc2int archivo_a_ser_compilado.obj
+~$
+\end{lstlisting}
+
+\section{Codificaci\'on 1}
+\textsc{Consigna}: \textbf{Realizar un programa que ejecute paralelamente 2 procesos donde cada uno imprima por pantalla un numero ``ID'' de proceso}.\\
+
+\lstinputlisting[language=Pascal, caption={TP1, Ejercicio 2}, label=tp1ej2]{PascalFC/tp1_ej2.pas}
+
+Una cuesti\'on a tener en cuenta en el \texttt{Listing \ref{tp1ej2}} es  el hecho de que la funci\'on \texttt{writeln} no es at\'omica, y es muy probable que se encuentre con intercalamiento aun mas de lo que ocurre con la funcion \texttt{write}.
+
+Alivianar un poco esta situaci\'on de intercalamiento en el ejercicio, \textit{sin el uso de sem\'aforos} es imprimiendo un parametro al lado del otro utilizando la funcion \texttt{write} como se demuestra a continuaci\'on:
+
+\lstinputlisting[language=Pascal, caption={TP1, Ejercicio 2 (write)}, label=tp1ej2_2]{PascalFC/tp1_ej2_2.pas}
+
+% === Bilbiografia === %
+
+\begin{thebibliography}{99}
+	% Item 1
+	\bibitem[Gort\'azar Bellas, et al, 2012]{gortazarbellas}\textsc{Gort\'azar Bellas, Francisco; Mart\'inez Unanue, Raquel; Fresno Fern\'andez, Victor}. \textit{Lenguajes de Programaci\'on y Procesadores - Cap\'itulo 3.5}. Editorial Universitaria Ramon Areces, Madrid, 2012. \textsc{ISBN: 9788499610702}.
+\end{thebibliography}
+\end{document}
