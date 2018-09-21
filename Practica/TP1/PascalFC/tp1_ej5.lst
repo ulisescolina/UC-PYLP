@@ -1,0 +1,282 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program tp1_ej3;
+    2     0 {
+    3     0  Imprime la multiplicacion de vectores
+    4     0  pares que se encuentren entre 0 y un limite
+    5     0  establecido
+    6     0  @param id Identificador del proceso
+    7     0  @param cantidad cantidad de numeros pares a
+    8     0   imprimir
+    9     0  @param limSuperior limite establecido para
+   10     0   el pool de numeros escogidos
+   11     0 }
+   12     0 const
+   13     0         tamanio = 10;
+   14     0         MAX_RANDOM  = 51;
+   15     0 type
+   16     0         vector = array[1..tamanio] of integer;
+   17     0 procedure cargarVector(var arr : vector);
+   18     0 var
+   19     0         i: integer;
+   20     0 begin
+   21     0         Randomize;
+   22     1         for i:=1 to tamanio do
+   23     5         begin
+   24     5                 arr[i] := Random(MAX_RANDOM);
+   25    11         end
+   26    11 end;
+   27    13 
+   28    13 procedure imprimir(arr : vector; id : integer);
+   29    13 var
+   30    13         i: integer;
+   31    13 begin
+   32    13         write('V', id, ': [');
+   33    19         for i:=1 to tamanio-1 do
+   34    25         begin
+   35    25                 write(arr[i],', ');
+   36    32         end;
+   37    33         write(arr[i],']');
+   38    40         writeln;
+   39    41 end;
+   40    42 
+   41    42 process type multiplicar (
+   42    42                         id : integer;
+   43    42                         var vec1 : vector;
+   44    42                         var vec2 : vector;
+   45    42                         p_ini : integer;
+   46    42                         p_fin : integer;
+   47    42                         var pescalar : integer
+   48    42                    );
+   49    42 
+   50    42 var
+   51    42         suma, producto, i : integer;
+   52    42 begin
+   53    42         suma := 0;
+   54    45         {if (length(vec1) = length(vec2)) then
+   55    45         begin}
+   56    45                 for i:=p_ini to p_fin do
+   57    49                 begin
+   58    49                         producto := 0;
+   59    52                         producto := vec1[i]*vec2[i];
+   60    63                         suma := suma + producto;
+   61    68                 end;
+   62    69         {end;}
+   63    69         pescalar := pescalar + suma;
+   64    74 end;
+   65    75 var
+   66    75         p1, p2, p3, p4, p5 : multiplicar;
+   67    75         productoEscalar : integer;
+   68    75         vec1, vec2: vector;
+   69    75 begin
+   70    75         productoEscalar := 0;
+   71    78         cargarVector(vec1);
+   72    81         cargarVector(vec2);
+   73    84         imprimir(vec1, 1);
+   74    89         imprimir(vec2, 2);
+   75    94         cobegin
+   76    95                 p1 (1, vec1, vec2, 1, 2, productoEscalar);
+   77   105                 p2 (2, vec1, vec2, 3, 4, productoEscalar);
+   78   115                 p3 (3, vec1, vec2, 5, 6, productoEscalar);
+   79   125                 p4 (4, vec1, vec2, 7, 8, productoEscalar);
+   80   135                 p5 (5, vec1, vec2, 9, 10, productoEscalar);
+   81   145         coend;
+   82   146         writeln('El producto escalar de los vectores proporcionados es: ', productoEscalar);
+   83   151 end.
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0   75    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   constant    integer         0   FALSE    1   10    0  tamanio
+ 59    58   constant    integer         0   FALSE    1   51    0  max_random
+ 60    59   type id     array           1   FALSE    1   10    0  vector
+ 61    60   procedure   notyp           3    TRUE    1    0    0  cargarvector
+ 62     0   variable    array           1   FALSE    2    5    0  arr
+ 63    62   variable    integer         0    TRUE    2    6    0  i
+ 64    61   procedure   notyp           4    TRUE    1   13    0  imprimir
+ 65     0   variable    array           1    TRUE    2    5    0  arr
+ 66    65   variable    integer         0    TRUE    2   15    0  id
+ 67    66   variable    integer         0    TRUE    2   16    0  i
+ 68    64   type id     process         5    TRUE    1   42    0  multiplicar
+ 69     0   variable    integer         0    TRUE    2    5    0  id
+ 70    69   variable    array           1   FALSE    2    6    0  vec1
+ 71    70   variable    array           1   FALSE    2    7    0  vec2
+ 72    71   variable    integer         0    TRUE    2    8    0  p_ini
+ 73    72   variable    integer         0    TRUE    2    9    0  p_fin
+ 74    73   variable    integer         0   FALSE    2   10    0  pescalar
+ 75    74   variable    integer         0    TRUE    2   11    0  suma
+ 76    75   variable    integer         0    TRUE    2   12    0  producto
+ 77    76   variable    integer         0    TRUE    2   13    0  i
+ 78    68   variable    process         5    TRUE    1    5    0  p1
+ 79    78   variable    process         5    TRUE    1    6    0  p2
+ 80    79   variable    process         5    TRUE    1    7    0  p3
+ 81    80   variable    process         5    TRUE    1    8    0  p4
+ 82    81   variable    process         5    TRUE    1    9    0  p5
+ 83    82   variable    integer         0    TRUE    1   10    0  productoescalar
+ 84    83   variable    array           1    TRUE    1   11    0  vec1
+ 85    84   variable    array           1    TRUE    1   21    0  vec2
+
+Generated P-code
+
+    0     rndmiz        0         0 ; 20
+    1     ldadr        2         6 ; 21
+    2     ldcon.i      0         1 ; 22
+    3     ldcon.i      0        10 ; 22
+    4     for1u.i      0        12 ; 22
+    5     ldval.adr    2         5 ; 23
+    6     ldval.i      2         6 ; 24
+    7     ixary.i      0         1 ; 24
+    8     ldcon.i      0        51 ; 24
+    9     stfun.i      0        19 ; 24
+   10     store.i      0         0 ; 24
+   11     for2u.i      0         5 ; 24
+   12     rproc        0         0 ; 25
+   13     ldcon.c      0        86 ; 32
+   14     wrval.c      0         0 ; 32
+   15     ldval.i      2        15 ; 32
+   16     wrval.i      0         0 ; 32
+   17     ldcon.i      0         3 ; 32
+   18     wrstr        0         0 ; 32
+   19     ldadr        2        16 ; 32
+   20     ldcon.i      0         1 ; 33
+   21     ldcon.i      0        10 ; 33
+   22     ldcon.i      0         1 ; 33
+   23     sub  .i      0         0 ; 33
+   24     for1u.i      0        33 ; 33
+   25     ldadr        2         5 ; 35
+   26     ldval.i      2        16 ; 35
+   27     ixary.i      0         1 ; 35
+   28     repad.i      0         0 ; 35
+   29     wrval.i      0         0 ; 35
+   30     ldcon.i      0         2 ; 35
+   31     wrstr        0         3 ; 35
+   32     for2u.i      0        25 ; 35
+   33     ldadr        2         5 ; 37
+   34     ldval.i      2        16 ; 37
+   35     ixary.i      0         1 ; 37
+   36     repad.i      0         0 ; 37
+   37     wrval.i      0         0 ; 37
+   38     ldcon.c      0        93 ; 37
+   39     wrval.c      0         0 ; 37
+   40     wrlin        0         0 ; 37
+   41     rproc        0         0 ; 38
+   42     ldadr        2        11 ; 52
+   43     ldcon.i      0         0 ; 53
+   44     store.i      0         0 ; 53
+   45     ldadr        2        13 ; 53
+   46     ldval.i      2         8 ; 56
+   47     ldval.i      2         9 ; 56
+   48     for1u.i      0        69 ; 56
+   49     ldadr        2        12 ; 57
+   50     ldcon.i      0         0 ; 58
+   51     store.i      0         0 ; 58
+   52     ldadr        2        12 ; 58
+   53     ldval.adr    2         6 ; 59
+   54     ldval.i      2        13 ; 59
+   55     ixary.i      0         1 ; 59
+   56     repad.i      0         0 ; 59
+   57     ldval.adr    2         7 ; 59
+   58     ldval.i      2        13 ; 59
+   59     ixary.i      0         1 ; 59
+   60     repad.i      0         0 ; 59
+   61     mul  .i      0         0 ; 59
+   62     store.i      0         0 ; 59
+   63     ldadr        2        11 ; 59
+   64     ldval.i      2        11 ; 60
+   65     ldval.i      2        12 ; 60
+   66     add  .i      0         0 ; 60
+   67     store.i      0         0 ; 60
+   68     for2u.i      0        49 ; 60
+   69     ldval.adr    2        10 ; 61
+   70     ldind.i      2        10 ; 63
+   71     ldval.i      2        11 ; 63
+   72     add  .i      0         0 ; 63
+   73     store.i      0         0 ; 63
+   74     rproc        1         0 ; 63
+   75     ldadr        1        10 ; 69
+   76     ldcon.i      0         0 ; 70
+   77     store.i      0         0 ; 70
+   78     mrkst        0        61 ; 70
+   79     ldadr        1        11 ; 71
+   80     calls        0         5 ; 71
+   81     mrkst        0        61 ; 71
+   82     ldadr        1        21 ; 72
+   83     calls        0         5 ; 72
+   84     mrkst        0        64 ; 72
+   85     ldadr        1        11 ; 73
+   86     ldblk        0        10 ; 73
+   87     ldcon.i      0         1 ; 73
+   88     calls        0        15 ; 73
+   89     mrkst        0        64 ; 73
+   90     ldadr        1        21 ; 74
+   91     ldblk        0        10 ; 74
+   92     ldcon.i      0         2 ; 74
+   93     calls        0        15 ; 74
+   94     cobeg        0         0 ; 74
+   95     mrkst        1        68 ; 75
+   96     ldadr        1         5 ; 75
+   97     procv        0         0 ; 75
+   98     ldcon.i      0         1 ; 76
+   99     ldadr        1        11 ; 76
+  100     ldadr        1        21 ; 76
+  101     ldcon.i      0         1 ; 76
+  102     ldcon.i      0         2 ; 76
+  103     ldadr        1        10 ; 76
+  104     calls        1        10 ; 76
+  105     mrkst        1        68 ; 76
+  106     ldadr        1         6 ; 76
+  107     procv        0         0 ; 76
+  108     ldcon.i      0         2 ; 77
+  109     ldadr        1        11 ; 77
+  110     ldadr        1        21 ; 77
+  111     ldcon.i      0         3 ; 77
+  112     ldcon.i      0         4 ; 77
+  113     ldadr        1        10 ; 77
+  114     calls        1        10 ; 77
+  115     mrkst        1        68 ; 77
+  116     ldadr        1         7 ; 77
+  117     procv        0         0 ; 77
+  118     ldcon.i      0         3 ; 78
+  119     ldadr        1        11 ; 78
+  120     ldadr        1        21 ; 78
+  121     ldcon.i      0         5 ; 78
+  122     ldcon.i      0         6 ; 78
+  123     ldadr        1        10 ; 78
+  124     calls        1        10 ; 78
+  125     mrkst        1        68 ; 78
+  126     ldadr        1         8 ; 78
+  127     procv        0         0 ; 78
+  128     ldcon.i      0         4 ; 79
+  129     ldadr        1        11 ; 79
+  130     ldadr        1        21 ; 79
+  131     ldcon.i      0         7 ; 79
+  132     ldcon.i      0         8 ; 79
+  133     ldadr        1        10 ; 79
+  134     calls        1        10 ; 79
+  135     mrkst        1        68 ; 79
+  136     ldadr        1         9 ; 79
+  137     procv        0         0 ; 79
+  138     ldcon.i      0         5 ; 80
+  139     ldadr        1        11 ; 80
+  140     ldadr        1        21 ; 80
+  141     ldcon.i      0         9 ; 80
+  142     ldcon.i      0        10 ; 80
+  143     ldadr        1        10 ; 80
+  144     calls        1        10 ; 80
+  145     coend        0         0 ; 80
+  146     ldcon.i      0        55 ; 82
+  147     wrstr        0         5 ; 82
+  148     ldval.i      1        10 ; 82
+  149     wrval.i      0         0 ; 82
+  150     wrlin        0         0 ; 82
+  151     stop         0         0 ; 82

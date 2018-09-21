@@ -7,9 +7,12 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{listings}
-%\lstset{basicstyle=\ttfamily,
- % showstringspaces=false,
-%}
+\lstset{
+ showstringspaces=false,
+ tabsize=2,
+ frame=single,
+ numbers=left
+}
 
 \title{\textsc{Paradigmas y Lenguajes de Programaci\'on\\Trabajo Pr\'actico N\'umero 1\\Pr\'actica}}
 \author{Ulises C. Ramirez [uli.r19@gmail.com]\\H\'ector Chripczuk\\Ver\'onica Gonzalez}
@@ -87,10 +90,54 @@ Antes de presentar el c\'odigo del programa se aclara que fue necesario el uso d
 
 \lstinputlisting[language=Pascal, caption={TP1, Ejercicio 4}, label=tp1ej4]{PascalFC/tp1_ej4.pas}
 
+\section{Codificaci\'on 4}
+\textsc{Consigna}: \textbf{crear un algoritmo que realice el producto escalar de dos vectores de 10 elementos.}
 
+\lstinputlisting[language=Pascal, caption={TP1, Ejercicio 5}, label=tp1ej5]{PascalFC/tp1_ej5.pas}
 
+\section{Investigar}
+\textsc{Consignas}: \textbf{
+\begin{itemize}
+  \item ?`Qu\'e diferencia existe entre la multiprogramaci\'on y el multiproceso?
+  \item Describa que es una \textit{instrucci\'on at\'omica} y que es \textit{intercalacion}
+  \item ?`Qu\'e son los sem\'aforos en la programaci\'on paralela? ?`Para qu\'e sirven?
+  \item ?`Cu\'ales son sus instrucciones y para qu\'e se utiliza cada una?
+\end{itemize}
+}
+\subsection{Multiprogramaci\'on y Multiproceso}
+Ambos describen una forma de compartir el tiempo de computo de un sistema por programas, que en ultima instancia ayuda a dar una explicaci\'on conceptual de lo que significa concurrencia. La diferencia la expuesta en \cite{gortazarbellas} es la siguiente:
+La \textbf{\textit{Multiprogramacion}}, se da cuando los programas se ejecutan en un \'unico procesador disponible y sus procesos internos comparten el tiempo de c\'omputo del procesador mencionado. Se habla de \textbf{\textit{Multiproceso}}, cuando el sistema en el cual se ejecuta el programa posee multiples procesadores, entonces es posible asignar diferentes procesos a diferentes procesadores.
+
+\subsection{?`Qu\'e es una \textit{instrucci\'on at\'omica} y que es la \textit{intercalaci\'on}?}
+\label{sub:atomicaintercalacion}
+Se considera una \textit{instrucci\'on at\'omica} \cite{gortazarbellas} a aquella que se ejecuta completamente antes de que se ejecute ninguna otra instrucci\'on de cualquier otro proceso del programa, una \textit{intercalaci\'on} en un programa es una secuencia de ejecuci\'on de las instrucciones at\'omicas con las que cuente dicho programa, en el caso de que hayan 2 instrucciones at\'omicas ejecutadas por 2 procesos concurrentes, existiran 4 posibles intercalaciones.
+
+\subsection{?`Qu\'e son los sem\'aforos en la programacion paralela?}
+Los sem\'aforos son una herramienta que se destina para la sincronizaci\'on de procesos, en PascalFC estos son un tipo abstracto de datos, y como tal tiene operaciones y estructuras de datos internos. Todo sem\'aforo tiene un contador que toma valores positivos, y una lista de procesos asociados.
+\subsection{?`Para qu\'e sirven?}
+Estos sirven para garantizar que recursos en el sistema que deben ser utilizados por un proceso a la vez, efectivamente sean utilizados por un proceso a la vez, este conjunto de instrucciones que acceden a las areas mencionadas son denominados \textit{secci\'on cr\'itica}.
+
+\subsection{?`Cuales son sus instrucciones y para que se utiliza cada una?}
+Las operaciones que se pueden invocar sobre una variable de tipo sem\'aforo son:
+\begin{itemize}
+\item \texttt{initial(s,v)} inicializa el contador del sem\'aforo \texttt{s} al valor \texttt{v}. Este procedimiento solo se puede invocar una vez y debe ser llamado desde el programa principal. Debe ser inicializado antes de utilizarse.
+\item \texttt{wait(s)} Este procedimiento solo se puede invocar desde un proceso. Funcionamiento:
+  \begin{itemize}
+    \item Si el contador \texttt{s} tiene un valor mayor que cero, el proceso contin\'ua su ejecuci\'on y el valor del contador se decrementa en uno.
+    \item Si el contador del sem\'aforo tiene el contador igual a cero, el proceso se queda bloqueado y se a\~{n}ade a la lista de procesos bloqueados del sem\'aforo.
+  \end{itemize}
+\item \texttt{signal(s)} Este procedimiento solo se puede invocar desde un proceso. Funcionamiento:
+  \begin{itemize}
+    \item Si no hay procesos bloqueados en el sem\'aforo \texttt{s}, se incrementa el valor de contador en una unidad.
+    \item Si hay procesos bloqueados en el sem\'aforo, se elige aleatoriamente a uno de ellos y se desbloquea para que continue su ejecuci\'on.
+  \end{itemize}
+\end{itemize}
+
+\section{}
+
+<++>
 % === Bilbiografia === %
-
+\newpage
 \begin{thebibliography}{99}
 	% Item 1
 	\bibitem[Gort\'azar Bellas, et al, 2012]{gortazarbellas}\textsc{Gort\'azar Bellas, Francisco; Mart\'inez Unanue, Raquel; Fresno Fern\'andez, Victor}. \textit{Lenguajes de Programaci\'on y Procesadores - Cap\'itulo 3.5}. Editorial Universitaria Ramon Areces, Madrid, 2012. \textsc{ISBN: 9788499610702}.
