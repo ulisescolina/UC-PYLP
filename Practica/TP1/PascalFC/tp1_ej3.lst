@@ -7,35 +7,49 @@ J C Coppens, Universidad Católica de Córdoba
 Compiler listing
 
     1     0 program tp1_ej3;
-    2     0 
-    3     0 process type pares (id : integer; cantidad : integer; limSuperior : integer);
-    4     0         var
-    5     0                 cant : integer; {cantidad de pares encontrados}
-    6     0                 par : integer; {guardamos el numero aleatorio temporalmente}
-    7     0         begin
-    8     0                 Randomize;
-    9     1                 cant := 0;
-   10     4                 par := 0;
-   11     7                 while cant < cantidad do
-   12    11                 begin
-   13    11                         par:=Random(limSuperior)+1;
-   14    17                         if par mod 2 = 0 then
-   15    23                         begin
-   16    23                                 writeln( 'El proceso ', id, ' imprime ',par);
-   17    32                                 cant := cant + 1;
-   18    37                                 par:=0;
-   19    40                         end;
-   20    40                 end;
-   21    41         end;
-   22    42 var
-   23    42         p1, p2, p3 : pares;
-   24    42 begin
-   25    42         cobegin
-   26    43                 p1 (1, 5, 100) ;
-   27    50                 p2 (2, 5, 40) ;
-   28    57                 p3 (3, 10, 35);
-   29    64         coend;
-   30    65 end.
+    2     0 {
+    3     0  Imprime una cantidad determinada de numeros
+    4     0  pares que se encuentren entre 0 y un limite
+    5     0  establecido
+    6     0  @param id Identificador del proceso
+    7     0  @param cantidad cantidad de numeros pares a
+    8     0   imprimir
+    9     0  @param limSuperior limite establecido para
+   10     0   el pool de numeros escogidos
+   11     0 }
+   12     0 process type pares (
+   13     0                         id : integer;
+   14     0                         cantidad : integer;
+   15     0                         limSuperior : integer
+   16     0                    );
+   17     0         var
+   18     0                 cant : integer;
+   19     0                 par : integer;
+   20     0         begin
+   21     0                 Randomize;
+   22     1                 cant := 0;
+   23     4                 par := 0;
+   24     7                 while cant < cantidad do
+   25    11                 begin
+   26    11                         par:=Random(limSuperior)+1;
+   27    17                         if par mod 2 = 0 then
+   28    23                         begin
+   29    23                           writeln( 'El proceso ',
+   30    25                              id, ' imprime ',par);
+   31    32                           cant := cant + 1;
+   32    37                           par:=0;
+   33    40                         end;
+   34    40                 end;
+   35    41         end;
+   36    42 var
+   37    42         p1, p2, p3 : pares;
+   38    42 begin
+   39    42         cobegin
+   40    43                 p1 (1, 5, 100) ;
+   41    50                 p2 (2, 5, 40) ;
+   42    57                 p3 (3, 10, 35);
+   43    64         coend;
+   44    65 end.
 
 
 Symbol table
@@ -56,69 +70,69 @@ Symbol table
 
 Generated P-code
 
-    0     rndmiz        0         0 ; 7
-    1     ldadr        2         8 ; 8
-    2     ldcon.i      0         0 ; 9
-    3     store.i      0         0 ; 9
-    4     ldadr        2         9 ; 9
-    5     ldcon.i      0         0 ; 10
-    6     store.i      0         0 ; 10
-    7     ldval.i      2         8 ; 11
-    8     ldval.i      2         6 ; 11
-    9     rellt.i      0         0 ; 11
-   10     jmpiz        0        41 ; 11
-   11     ldadr        2         9 ; 12
-   12     ldval.i      2         7 ; 13
-   13     stfun.i      0        19 ; 13
-   14     ldcon.i      0         1 ; 13
-   15     add  .i      0         0 ; 13
-   16     store.i      0         0 ; 13
-   17     ldval.i      2         9 ; 14
-   18     ldcon.i      0         2 ; 14
-   19     modop.i      0         0 ; 14
-   20     ldcon.i      0         0 ; 14
-   21     releq.i      0         0 ; 14
-   22     jmpiz        0        40 ; 14
-   23     ldcon.i      0        11 ; 16
-   24     wrstr        0         0 ; 16
-   25     ldval.i      2         5 ; 16
-   26     wrval.i      0         0 ; 16
-   27     ldcon.i      0         9 ; 16
-   28     wrstr        0        11 ; 16
-   29     ldval.i      2         9 ; 16
-   30     wrval.i      0         0 ; 16
-   31     wrlin        0         0 ; 16
-   32     ldadr        2         8 ; 16
-   33     ldval.i      2         8 ; 17
-   34     ldcon.i      0         1 ; 17
-   35     add  .i      0         0 ; 17
-   36     store.i      0         0 ; 17
-   37     ldadr        2         9 ; 17
-   38     ldcon.i      0         0 ; 18
-   39     store.i      0         0 ; 18
-   40     jmp          0         7 ; 19
-   41     rproc        1         0 ; 20
-   42     cobeg        0         0 ; 23
-   43     mrkst        1        58 ; 25
-   44     ldadr        1         5 ; 25
-   45     procv        0         0 ; 25
-   46     ldcon.i      0         1 ; 26
-   47     ldcon.i      0         5 ; 26
-   48     ldcon.i      0       100 ; 26
-   49     calls        1         7 ; 26
-   50     mrkst        1        58 ; 26
-   51     ldadr        1         6 ; 26
-   52     procv        0         0 ; 26
-   53     ldcon.i      0         2 ; 27
-   54     ldcon.i      0         5 ; 27
-   55     ldcon.i      0        40 ; 27
-   56     calls        1         7 ; 27
-   57     mrkst        1        58 ; 27
-   58     ldadr        1         7 ; 27
-   59     procv        0         0 ; 27
-   60     ldcon.i      0         3 ; 28
-   61     ldcon.i      0        10 ; 28
-   62     ldcon.i      0        35 ; 28
-   63     calls        1         7 ; 28
-   64     coend        0         0 ; 28
-   65     stop         0         0 ; 29
+    0     rndmiz        0         0 ; 20
+    1     ldadr        2         8 ; 21
+    2     ldcon.i      0         0 ; 22
+    3     store.i      0         0 ; 22
+    4     ldadr        2         9 ; 22
+    5     ldcon.i      0         0 ; 23
+    6     store.i      0         0 ; 23
+    7     ldval.i      2         8 ; 24
+    8     ldval.i      2         6 ; 24
+    9     rellt.i      0         0 ; 24
+   10     jmpiz        0        41 ; 24
+   11     ldadr        2         9 ; 25
+   12     ldval.i      2         7 ; 26
+   13     stfun.i      0        19 ; 26
+   14     ldcon.i      0         1 ; 26
+   15     add  .i      0         0 ; 26
+   16     store.i      0         0 ; 26
+   17     ldval.i      2         9 ; 27
+   18     ldcon.i      0         2 ; 27
+   19     modop.i      0         0 ; 27
+   20     ldcon.i      0         0 ; 27
+   21     releq.i      0         0 ; 27
+   22     jmpiz        0        40 ; 27
+   23     ldcon.i      0        11 ; 29
+   24     wrstr        0         0 ; 29
+   25     ldval.i      2         5 ; 29
+   26     wrval.i      0         0 ; 29
+   27     ldcon.i      0         9 ; 30
+   28     wrstr        0        11 ; 30
+   29     ldval.i      2         9 ; 30
+   30     wrval.i      0         0 ; 30
+   31     wrlin        0         0 ; 30
+   32     ldadr        2         8 ; 30
+   33     ldval.i      2         8 ; 31
+   34     ldcon.i      0         1 ; 31
+   35     add  .i      0         0 ; 31
+   36     store.i      0         0 ; 31
+   37     ldadr        2         9 ; 31
+   38     ldcon.i      0         0 ; 32
+   39     store.i      0         0 ; 32
+   40     jmp          0         7 ; 33
+   41     rproc        1         0 ; 34
+   42     cobeg        0         0 ; 37
+   43     mrkst        1        58 ; 39
+   44     ldadr        1         5 ; 39
+   45     procv        0         0 ; 39
+   46     ldcon.i      0         1 ; 40
+   47     ldcon.i      0         5 ; 40
+   48     ldcon.i      0       100 ; 40
+   49     calls        1         7 ; 40
+   50     mrkst        1        58 ; 40
+   51     ldadr        1         6 ; 40
+   52     procv        0         0 ; 40
+   53     ldcon.i      0         2 ; 41
+   54     ldcon.i      0         5 ; 41
+   55     ldcon.i      0        40 ; 41
+   56     calls        1         7 ; 41
+   57     mrkst        1        58 ; 41
+   58     ldadr        1         7 ; 41
+   59     procv        0         0 ; 41
+   60     ldcon.i      0         3 ; 42
+   61     ldcon.i      0        10 ; 42
+   62     ldcon.i      0        35 ; 42
+   63     calls        1         7 ; 42
+   64     coend        0         0 ; 42
+   65     stop         0         0 ; 43

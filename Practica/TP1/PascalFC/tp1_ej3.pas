@@ -1,31 +1,35 @@
 program tp1_ej3;
 {
- @ Imprime una cantidad determinada de numeros pares que se encuentren
-entre 0 y un limite establecido
+ Imprime una cantidad determinada de numeros
+ pares que se encuentren entre 0 y un limite
+ establecido
  @param id Identificador del proceso
- @param cantidad cantidad de numeros pares a imprimir
- @param limSuperior limite establecido para el pool de numeros escogidos
+ @param cantidad cantidad de numeros pares a
+  imprimir
+ @param limSuperior limite establecido para
+  el pool de numeros escogidos
 }
-process type pares (id : integer; cantidad : integer;
-			limSuperior : integer);
+process type pares (
+			id : integer;
+			cantidad : integer;
+			limSuperior : integer
+		   );
 	var
-		cant : integer; {Cantidad de pares
-				encontrados}
-		par : integer; {Aux para guardar un
-				numero temporalmente}
+		cant : integer;
+		par : integer;
 	begin
 		Randomize;
 		cant := 0;
 		par := 0;
 		while cant < cantidad do
 		begin
-			par:=Random(limSuperior)+1; {Se guarda el aleatorio
-						     temporalmente}
+			par:=Random(limSuperior)+1;
 			if par mod 2 = 0 then
 			begin
-				writeln( 'El proceso ', id, ' imprime ',par);
-				cant := cant + 1;
-				par:=0;
+			  writeln( 'El proceso ',
+			     id, ' imprime ',par);
+			  cant := cant + 1;
+		  	  par:=0;
 			end;
 		end;
 	end;
