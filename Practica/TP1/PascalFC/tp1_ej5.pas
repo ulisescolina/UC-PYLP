@@ -1,4 +1,4 @@
-program tp1_ej3;
+program tp1_ej5;
 const
 	tamanio = 10;
 	MAX_RANDOM  = 51;
