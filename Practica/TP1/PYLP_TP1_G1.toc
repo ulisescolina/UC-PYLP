@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {7.2}Ejercicio \texttt {Secci\'on 3\hbox {}}}{10}
 \contentsline {section}{\numberline {8}Inconvenientes de c\'odigo en el \texttt {Anexo 10.1\hbox {}}}{11}
 \contentsline {subsection}{\numberline {8.1}Inconsistencias en \texttt {Anexo 10.1\hbox {}}}{11}
-\contentsline {subsection}{\numberline {8.2}Solucion mediante sem\'aforos}{11}
-\contentsline {section}{\numberline {9}Codificaci\'on 5}{12}
+\contentsline {subsection}{\numberline {8.2}Solucion mediante sem\'aforos}{12}
+\contentsline {section}{\numberline {9}Codificaci\'on 5}{13}
 \contentsline {section}{\numberline {10}Anexos}{15}
 \contentsline {subsection}{\numberline {10.1}Programa 1}{15}
