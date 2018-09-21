@@ -1,0 +1,75 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program tp1_ej2;
+    2     0 
+    3     0 process type imprimir (
+    4     0                         id : integer;
+    5     0                         var s : semaphore
+    6     0                       );
+    7     0 begin
+    8     0         wait(s);
+    9     2         writeln( 'ID de proceso: ', id);
+   10     7         signal(s);
+   11     9 end;
+   12    10 var
+   13    10         p1, p2 : imprimir;
+   14    10         s : semaphore;
+   15    10 begin
+   16    10         initial(s, 1);
+   17    14         cobegin
+   18    15                 p1 (1, s) ;
+   19    21                 p2 (2, s) ;
+   20    27         coend;
+   21    28 end.
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0   10    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   type id     process         3    TRUE    1    0    0  imprimir
+ 59     0   variable    integer         0    TRUE    2    5    0  id
+ 60    59   variable    semaphore       0   FALSE    2    6    0  s
+ 61    58   variable    process         3    TRUE    1    5    0  p1
+ 62    61   variable    process         3    TRUE    1    6    0  p2
+ 63    62   variable    semaphore       0    TRUE    1    7    0  s
+
+Generated P-code
+
+    0     ldval.adr    2         6 ; 8
+    1     wait         0         0 ; 8
+    2     ldcon.i      0        15 ; 9
+    3     wrstr        0         0 ; 9
+    4     ldval.i      2         5 ; 9
+    5     wrval.i      0         0 ; 9
+    6     wrlin        0         0 ; 9
+    7     ldval.adr    2         6 ; 10
+    8     signl        0         0 ; 10
+    9     rproc        1         0 ; 10
+   10     ldadr        1         7 ; 16
+   11     ldcon.i      0         1 ; 16
+   12     lobnd.i      0         0 ; 16
+   13     sinit        0         0 ; 16
+   14     cobeg        0         0 ; 16
+   15     mrkst        1        58 ; 17
+   16     ldadr        1         5 ; 17
+   17     procv        0         0 ; 17
+   18     ldcon.i      0         1 ; 18
+   19     ldadr        1         7 ; 18
+   20     calls        1         6 ; 18
+   21     mrkst        1        58 ; 18
+   22     ldadr        1         6 ; 18
+   23     procv        0         0 ; 18
+   24     ldcon.i      0         2 ; 19
+   25     ldadr        1         7 ; 19
+   26     calls        1         6 ; 19
+   27     coend        0         0 ; 19
+   28     stop         0         0 ; 20

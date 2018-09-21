@@ -1,0 +1,156 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program tp1_ej3;
+    2     0 {
+    3     0  Imprime una cantidad determinada de numeros
+    4     0  pares que se encuentren entre 0 y un limite
+    5     0  establecido
+    6     0  @param id Identificador del proceso
+    7     0  @param cantidad cantidad de numeros pares a
+    8     0   imprimir
+    9     0  @param limSuperior limite establecido para
+   10     0   el pool de numeros escogidos
+   11     0 }
+   12     0 process type pares (
+   13     0                         id : integer;
+   14     0                         cantidad : integer;
+   15     0                         limSuperior : integer;
+   16     0                 {*}     var s : semaphore
+   17     0                    );
+   18     0 var
+   19     0         cant : integer;
+   20     0         par : integer;
+   21     0 begin
+   22     0         Randomize;
+   23     1         cant := 0;
+   24     4         par := 0;
+   25     7         while cant < cantidad do
+   26    11         begin
+   27    11                 par:=Random(limSuperior)+1;
+   28    17                 if par mod 2 = 0 then
+   29    23                 begin
+   30    23                 {*}     wait(s);
+   31    25                         writeln( 'El proceso ',
+   32    27                                 id, ' imprime ',par);
+   33    34                 {*}     signal(s);
+   34    36                         cant := cant + 1;
+   35    41                         par:=0;
+   36    44                 end;
+   37    44         end;
+   38    45 end;
+   39    46 var
+   40    46         p1, p2, p3 : pares;
+   41    46 {*}     s : semaphore;
+   42    46 begin
+   43    46 {*}     initial(s, 1);
+   44    50         cobegin
+   45    51                 p1 (1, 5, 100, s) ;
+   46    59                 p2 (2, 5, 40, s) ;
+   47    67                 p3 (3, 10, 35, s);
+   48    75         coend;
+   49    76 end.
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0   46    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   type id     process         3    TRUE    1    0    0  pares
+ 59     0   variable    integer         0    TRUE    2    5    0  id
+ 60    59   variable    integer         0    TRUE    2    6    0  cantidad
+ 61    60   variable    integer         0    TRUE    2    7    0  limsuperior
+ 62    61   variable    semaphore       0   FALSE    2    8    0  s
+ 63    62   variable    integer         0    TRUE    2    9    0  cant
+ 64    63   variable    integer         0    TRUE    2   10    0  par
+ 65    58   variable    process         3    TRUE    1    5    0  p1
+ 66    65   variable    process         3    TRUE    1    6    0  p2
+ 67    66   variable    process         3    TRUE    1    7    0  p3
+ 68    67   variable    semaphore       0    TRUE    1    8    0  s
+
+Generated P-code
+
+    0     rndmiz        0         0 ; 21
+    1     ldadr        2         9 ; 22
+    2     ldcon.i      0         0 ; 23
+    3     store.i      0         0 ; 23
+    4     ldadr        2        10 ; 23
+    5     ldcon.i      0         0 ; 24
+    6     store.i      0         0 ; 24
+    7     ldval.i      2         9 ; 25
+    8     ldval.i      2         6 ; 25
+    9     rellt.i      0         0 ; 25
+   10     jmpiz        0        45 ; 25
+   11     ldadr        2        10 ; 26
+   12     ldval.i      2         7 ; 27
+   13     stfun.i      0        19 ; 27
+   14     ldcon.i      0         1 ; 27
+   15     add  .i      0         0 ; 27
+   16     store.i      0         0 ; 27
+   17     ldval.i      2        10 ; 28
+   18     ldcon.i      0         2 ; 28
+   19     modop.i      0         0 ; 28
+   20     ldcon.i      0         0 ; 28
+   21     releq.i      0         0 ; 28
+   22     jmpiz        0        44 ; 28
+   23     ldval.adr    2         8 ; 30
+   24     wait         0         0 ; 30
+   25     ldcon.i      0        11 ; 31
+   26     wrstr        0         0 ; 31
+   27     ldval.i      2         5 ; 31
+   28     wrval.i      0         0 ; 31
+   29     ldcon.i      0         9 ; 32
+   30     wrstr        0        11 ; 32
+   31     ldval.i      2        10 ; 32
+   32     wrval.i      0         0 ; 32
+   33     wrlin        0         0 ; 32
+   34     ldval.adr    2         8 ; 33
+   35     signl        0         0 ; 33
+   36     ldadr        2         9 ; 33
+   37     ldval.i      2         9 ; 34
+   38     ldcon.i      0         1 ; 34
+   39     add  .i      0         0 ; 34
+   40     store.i      0         0 ; 34
+   41     ldadr        2        10 ; 34
+   42     ldcon.i      0         0 ; 35
+   43     store.i      0         0 ; 35
+   44     jmp          0         7 ; 36
+   45     rproc        1         0 ; 37
+   46     ldadr        1         8 ; 43
+   47     ldcon.i      0         1 ; 43
+   48     lobnd.i      0         0 ; 43
+   49     sinit        0         0 ; 43
+   50     cobeg        0         0 ; 43
+   51     mrkst        1        58 ; 44
+   52     ldadr        1         5 ; 44
+   53     procv        0         0 ; 44
+   54     ldcon.i      0         1 ; 45
+   55     ldcon.i      0         5 ; 45
+   56     ldcon.i      0       100 ; 45
+   57     ldadr        1         8 ; 45
+   58     calls        1         8 ; 45
+   59     mrkst        1        58 ; 45
+   60     ldadr        1         6 ; 45
+   61     procv        0         0 ; 45
+   62     ldcon.i      0         2 ; 46
+   63     ldcon.i      0         5 ; 46
+   64     ldcon.i      0        40 ; 46
+   65     ldadr        1         8 ; 46
+   66     calls        1         8 ; 46
+   67     mrkst        1        58 ; 46
+   68     ldadr        1         7 ; 46
+   69     procv        0         0 ; 46
+   70     ldcon.i      0         3 ; 47
+   71     ldcon.i      0        10 ; 47
+   72     ldcon.i      0        35 ; 47
+   73     ldadr        1         8 ; 47
+   74     calls        1         8 ; 47
+   75     coend        0         0 ; 47
+   76     stop         0         0 ; 48

@@ -66,6 +66,7 @@ Finalizados estos pasos ya tendremos instalado el PascalFC, para la compilaci\'o
 \end{lstlisting}
 
 \section{Codificaci\'on 1}
+\label{sec:ej2}
 \textsc{Consigna}: \textbf{Realizar un programa que ejecute paralelamente 2 procesos donde cada uno imprima por pantalla un numero ``ID'' de proceso}.\\
 
 \lstinputlisting[language=Pascal, caption={TP1, Ejercicio 2}, label=tp1ej2]{PascalFC/tp1_ej2.pas}
@@ -77,6 +78,7 @@ Alivianar un poco esta situaci\'on de intercalamiento en el ejercicio, \textit{s
 \lstinputlisting[language=Pascal, caption={TP1, Ejercicio 2 (write)}, label=tp1ej2_2]{PascalFC/tp1_ej2_2.pas}
 
 \section{Codificaci\'on 2}
+\label{sec:ej3}
 \textsc{Consigna}: \textbf{realizar un programa que ejecute paralelamente 3 procesos, 2 de los procesos deben imprimir 5 n\'umeros pares y el otro 10 n\'umeros pares.}
 
 \lstinputlisting[language=Pascal, caption={TP1, Ejercicio 3}, label=tp1ej3]{PascalFC/tp1_ej3.pas}
@@ -133,9 +135,44 @@ Las operaciones que se pueden invocar sobre una variable de tipo sem\'aforo son:
   \end{itemize}
 \end{itemize}
 
-\section{}
+\section{Aplicar sem\'aforos a los ejercicios en la \texttt{Secci\'on \ref{sec:ej2}} y la \texttt{Secci\'on \ref{sec:ej3}}}
 
-<++>
+\subsection{Ejercicio \texttt{Secci\'on \ref{sec:ej2}}}
+
+\lstinputlisting[language=Pascal, caption={TP1, Ejercicio 2 (Sem\'aforo)}, label=tp1ej2s]{PascalFC/tp1_ej2_semaforo.pas}
+
+\subsection{Ejercicio \texttt{Secci\'on \ref{sec:ej3}}}
+
+\lstinputlisting[language=Pascal, caption={TP1, Ejercicio 3 (Sem\'aforo)}, label=tp1ej3s]{PascalFC/tp1_ej3_semaforo.pas}
+
+
+\section{Inconvenientes de c\'odigo en el \texttt{Anexo \ref{sub:a11}}}
+
+\textsc{Consigna}: \textbf{
+\begin{itemize}
+\item Explique brevemente las inconsistencias que posee el programa en el \texttt{Anexo \ref{sub:a11}}
+\item Solucione el inconveniente utilizando sem\'aforos
+\end{itemize}
+}
+
+\subsection{Inconsistencias en \texttt{Anexo \ref{sub:a11}}}
+El segundo punto deja al descubierto el inconveniente mayor que posee el c\'odigo, el hecho que el ejercicio solicite que se solucione el problema con semaforos implica un caso de condicion de carrera en el acceso a la variable compartida \texttt{count}.\\
+
+Ambos procesos estan compartiendo el espacio de memoria con la variable global mencionada y ninguno de los procesos asegura la manipulacion de la misma mediante la solicitud de un cerrojo y consecuentemente tampoco se solicita que se ceda dicho cerrojo. Esto causar\'ia problemas de inconsistencia con lo que ven los dos procesos, porque al momento de acceder cargar al registro la variable para modificaci\'on en un proceso puede que tambien se este modificando en el otro, esto llevaria a que no se tome uno de los cambios, y por tanto se pierda informaci\'on.
+
+\subsection{Solucion mediante sem\'aforos}
+
+\lstinputlisting[language=Pascal, caption={TP1, C\'odigo de anexo (Sema\'aforo)}, label=tp1anexos]{PascalFC/tp1_anexo_semaforo.pas}
+
+
+% === Anexos === %
+\newpage
+\section{Anexos}
+
+\subsection{Programa 1}
+\label{sub:a11}
+\lstinputlisting[language=Pascal, caption={TP1, C\'odigo de anexo}, label=tp1anexo]{PascalFC/tp1_anexo.pas}
+
 % === Bilbiografia === %
 \newpage
 \begin{thebibliography}{99}

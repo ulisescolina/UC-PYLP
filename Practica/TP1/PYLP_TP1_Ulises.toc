@@ -3,3 +3,17 @@
 \contentsline {section}{\numberline {3}Codificaci\'on 2}{2}
 \contentsline {section}{\numberline {4}Codificaci\'on 3}{4}
 \contentsline {section}{\numberline {5}Codificaci\'on 4}{5}
+\contentsline {section}{\numberline {6}Investigar}{7}
+\contentsline {subsection}{\numberline {6.1}Multiprogramaci\'on y Multiproceso}{7}
+\contentsline {subsection}{\numberline {6.2}?`Qu\'e es una \textit {instrucci\'on at\'omica} y que es la \textit {intercalaci\'on}?}{8}
+\contentsline {subsection}{\numberline {6.3}?`Qu\'e son los sem\'aforos en la programacion paralela?}{8}
+\contentsline {subsection}{\numberline {6.4}?`Para qu\'e sirven?}{8}
+\contentsline {subsection}{\numberline {6.5}?`Cuales son sus instrucciones y para que se utiliza cada una?}{8}
+\contentsline {section}{\numberline {7}Aplicar sem\'aforos a los ejercicios en la \texttt {Secci\'on 2\hbox {}} y la \texttt {Secci\'on 3\hbox {}}}{9}
+\contentsline {subsection}{\numberline {7.1}Ejercicio \texttt {Secci\'on 2\hbox {}}}{9}
+\contentsline {subsection}{\numberline {7.2}Ejercicio \texttt {Secci\'on 3\hbox {}}}{9}
+\contentsline {section}{\numberline {8}Inconvenientes de c\'odigo en el \texttt {Anexo 9.1\hbox {}}}{10}
+\contentsline {subsection}{\numberline {8.1}Inconsistencias en \texttt {Anexo 9.1\hbox {}}}{11}
+\contentsline {subsection}{\numberline {8.2}Solucion mediante sem\'aforos}{11}
+\contentsline {section}{\numberline {9}Anexos}{13}
+\contentsline {subsection}{\numberline {9.1}Programa 1}{13}
