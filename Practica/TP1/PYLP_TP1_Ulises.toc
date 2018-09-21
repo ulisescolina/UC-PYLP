@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Instalaci\'on PascalFC}{1}
+\contentsline {section}{\numberline {2}Codificaci\'on 1}{1}
+\contentsline {section}{\numberline {3}Codificaci\'on 2}{2}
+\contentsline {section}{\numberline {4}Codificaci\'on 3}{4}
+\contentsline {section}{\numberline {5}Codificaci\'on 4}{5}
