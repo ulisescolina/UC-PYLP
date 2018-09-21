@@ -1,0 +1,194 @@
+- Pascal-FC for IBM PC compatibles - 
+- Compiler Version jc-0.9.40
+
+G L Davies  &  A Burns, University of Bradford
+J C Coppens, Universidad Católica de Córdoba
+
+Compiler listing
+
+    1     0 program tp1_prod_cons;
+    2     0 var
+    3     0         inp, out: channel of char;
+    4     0 
+    5     0 process buffer;
+    6     0 const
+    7     0         buffmax = 1;
+    8     0 var
+    9     0         store: array[0..buffmax] of char;
+   10     0         nextin, nextout, count: integer;
+   11     0 begin
+   12     0         nextin := 0;
+   13     3         nextout := 0;
+   14     6         count := 0;
+   15     9         repeat
+   16     9                 select
+   17     9                 when count <> 0 =>
+   18    13                         out ! store[nextout];
+   19    24                         count := count - 1;
+   20    29                         nextout := (nextout + 1) mod (buffmax + 1);
+   21    38                 or
+   22    39                 when count < buffmax =>
+   23    42                         inp ? store[nextin];
+   24    52                         count := count + 1;
+   25    57                         nextin := (nextin + 1) mod (buffmax + 1 );
+   26    66                 end (* select *)
+   27    68         forever
+   28    69 end; (* buffer *)
+   29    70 
+   30    70 process producer;
+   31    70 var
+   32    70         local: char;
+   33    70 begin
+   34    70         for local := 'a' to 'z' do
+   35    74                 inp ! local
+   36    75 end; (* producer *)
+   37    79 
+   38    79 process consumer;
+   39    79 var
+   40    79         local: char;
+   41    79 begin
+   42    79         repeat
+   43    79                 out ? local;
+   44    82                 write(local);
+   45    84         until local = 'z';
+   46    88         writeln
+   47    88 end; (* consumer *)
+   48    90 
+   49    90 begin
+   50    90         cobegin
+   51    91                 producer;
+   52    95                 consumer;
+   53    99                 buffer
+   54    99         coend
+   55   103 end.
+
+
+Symbol table
+
+     link   object      type          ref  normal  lvl  adr  aux  name
+
+ 56    55   procedure   notyp           2    TRUE    0   90    0  _main
+ 57     0   variable    synch           0    TRUE    1    5    0  any
+ 58    57   variable    channel         1    TRUE    1    5    0  inp
+ 59    58   variable    channel         1    TRUE    1    8    0  out
+ 60    59   variable    process         3    TRUE    1   11    0  buffer
+ 61    60   type id     process         3    TRUE    1    0    0  $
+ 62     0   constant    integer         0   FALSE    2    1    0  buffmax
+ 63    62   variable    array           1    TRUE    2    5    0  store
+ 64    63   variable    integer         0    TRUE    2    7    0  nextin
+ 65    64   variable    integer         0    TRUE    2    8    0  nextout
+ 66    65   variable    integer         0    TRUE    2    9    0  count
+ 67    61   variable    process         4    TRUE    1   12    0  producer
+ 68    67   type id     process         4    TRUE    1   70    0  $
+ 69     0   variable    char            0    TRUE    2    5    0  local
+ 70    68   variable    process         5    TRUE    1   13    0  consumer
+ 71    70   type id     process         5    TRUE    1   79    0  $
+ 72     0   variable    char            0    TRUE    2    5    0  local
+
+Generated P-code
+
+    0     ldadr        2         7 ; 11
+    1     ldcon.i      0         0 ; 12
+    2     store.i      0         0 ; 12
+    3     ldadr        2         8 ; 12
+    4     ldcon.i      0         0 ; 13
+    5     store.i      0         0 ; 13
+    6     ldadr        2         9 ; 13
+    7     ldcon.i      0         0 ; 14
+    8     store.i      0         0 ; 14
+    9     sel1         0         0 ; 15
+   10     ldval.i      2         9 ; 17
+   11     ldcon.i      0         0 ; 17
+   12     relne.i      0         0 ; 17
+   13     jmpiz        0        39 ; 17
+   14     ldadr        1         8 ; 17
+   15     ldadr        2         5 ; 18
+   16     ldval.i      2         8 ; 18
+   17     ixary.i      0         1 ; 18
+   18     repad.c      0         0 ; 18
+   19     sel1         3         0 ; 18
+   20     sel1         4         1 ; 18
+   21     sel1         5        24 ; 18
+   22     ldcon.i      0         0 ; 18
+   23     jmp          0        39 ; 18
+   24     ldadr        2         9 ; 18
+   25     ldval.i      2         9 ; 19
+   26     ldcon.i      0         1 ; 19
+   27     sub  .i      0         0 ; 19
+   28     store.i      0         0 ; 19
+   29     ldadr        2         8 ; 19
+   30     ldval.i      2         8 ; 20
+   31     ldcon.i      0         1 ; 20
+   32     add  .i      0         0 ; 20
+   33     ldcon.i      0         1 ; 20
+   34     ldcon.i      0         1 ; 20
+   35     add  .i      0         0 ; 20
+   36     modop.i      0         0 ; 20
+   37     store.i      0         0 ; 20
+   38     jmp          0        68 ; 20
+   39     ldval.i      2         9 ; 22
+   40     ldcon.i      0         1 ; 22
+   41     rellt.i      0         0 ; 22
+   42     jmpiz        0        67 ; 22
+   43     ldadr        1         5 ; 22
+   44     ldadr        2         5 ; 23
+   45     ldval.i      2         7 ; 23
+   46     ixary.i      0         1 ; 23
+   47     sel1         3         2 ; 23
+   48     sel1         4         1 ; 23
+   49     sel1         5        52 ; 23
+   50     ldcon.i      0         0 ; 23
+   51     jmp          0        67 ; 23
+   52     ldadr        2         9 ; 23
+   53     ldval.i      2         9 ; 24
+   54     ldcon.i      0         1 ; 24
+   55     add  .i      0         0 ; 24
+   56     store.i      0         0 ; 24
+   57     ldadr        2         7 ; 24
+   58     ldval.i      2         7 ; 25
+   59     ldcon.i      0         1 ; 25
+   60     add  .i      0         0 ; 25
+   61     ldcon.i      0         1 ; 25
+   62     ldcon.i      0         1 ; 25
+   63     add  .i      0         0 ; 25
+   64     modop.i      0         0 ; 25
+   65     store.i      0         0 ; 25
+   66     jmp          0        68 ; 25
+   67     sel0         0         0 ; 25
+   68     jmp          0         9 ; 25
+   69     rproc        1         0 ; 27
+   70     ldadr        2         5 ; 33
+   71     ldcon.c      0        97 ; 34
+   72     ldcon.c      0       122 ; 34
+   73     for1u.c      0        78 ; 34
+   74     ldadr        1         5 ; 34
+   75     ldval.c      2         5 ; 35
+   76     chnwr.c      0         1 ; 35
+   77     for2u.c      0        74 ; 35
+   78     rproc        1         0 ; 35
+   79     ldadr        1         8 ; 42
+   80     ldadr        2         5 ; 43
+   81     chnrd        0         1 ; 43
+   82     ldval.c      2         5 ; 44
+   83     wrval.c      0         0 ; 44
+   84     ldval.c      2         5 ; 45
+   85     ldcon.c      0       122 ; 45
+   86     releq.c      0         0 ; 45
+   87     jmpiz        0        79 ; 45
+   88     wrlin        0         0 ; 45
+   89     rproc        1         0 ; 46
+   90     cobeg        0         0 ; 47
+   91     mrkst        1        68 ; 50
+   92     ldadr        1        12 ; 50
+   93     procv        0         0 ; 50
+   94     calls        1         4 ; 50
+   95     mrkst        1        71 ; 51
+   96     ldadr        1        13 ; 51
+   97     procv        0         0 ; 51
+   98     calls        1         4 ; 51
+   99     mrkst        1        61 ; 52
+  100     ldadr        1        11 ; 52
+  101     procv        0         0 ; 52
+  102     calls        1         4 ; 52
+  103     coend        0         0 ; 53
+  104     stop         0         0 ; 54

@@ -14,7 +14,7 @@
  numbers=left
 }
 
-\title{\textsc{Paradigmas y Lenguajes de Programaci\'on\\Trabajo Pr\'actico N\'umero 1\\Pr\'actica}}
+\title{\textsc{Paradigmas y Lenguajes de Programaci\'on\\Trabajo Pr\'actico N\'umero 1\\-- Pr\'actica --}}
 \author{Ulises C. Ramirez [uli.r19@gmail.com]\\H\'ector Chripczuk\\Ver\'onica Gonzalez}
 \date{14 de Septiembre, 2018}
 
@@ -64,6 +64,8 @@ Finalizados estos pasos ya tendremos instalado el PascalFC, para la compilaci\'o
 ~$ ./pfc2int archivo_a_ser_compilado.obj
 ~$
 \end{lstlisting}
+\subsection{Pascal-FC + Geany}
+De forma alternativa, se encontr\'o igualmente \'util la utilizaci\'on del manual ofrecido por la c\'atedra para la conjunci\'on del par de archivos que componen Pascal-FC (Compilador e Interprete) y el entorno de desarrollo Geany teniendo los mismos resultados satisfactorios que se logran en el manual.
 
 \section{Codificaci\'on 1}
 \label{sec:ej2}
@@ -164,6 +166,14 @@ Ambos procesos estan compartiendo el espacio de memoria con la variable global m
 
 \lstinputlisting[language=Pascal, caption={TP1, C\'odigo de anexo (Sema\'aforo)}, label=tp1anexos]{PascalFC/tp1_anexo_semaforo.pas}
 
+\section{Codificaci\'on 5}
+\textsc{Consigna}: \textbf{escribir un algoritmo que posea 2 procesos, uno que produzca n\'umeros y los almacene en alg\'un tipo de estructura (\textit{investitar el tipo channel of}) y otro que tome los valores producidos y los imprima por pantalla. (Algoritmo productor-consumidor).}
+
+Si bien encontr\'e algo, y con la similaridad con otras c\'atedras como Sistemas Operativos entiendo el concepto de que es lo que sucede en un algoritmo \textit{productor-consumidor}, no termino de entender el funcionamiento del codigo expresado en \cite{davies1992} que se lista a continuaci\'on.
+
+\lstinputlisting[language=Pascal, caption={TP1, Productor-Consumidor \cite{davies1992}}, label=tppc]{PascalFC/tp1_prod-cons.pas}
+
+
 
 % === Anexos === %
 \newpage
@@ -178,5 +188,7 @@ Ambos procesos estan compartiendo el espacio de memoria con la variable global m
 \begin{thebibliography}{99}
 	% Item 1
 	\bibitem[Gort\'azar Bellas, et al, 2012]{gortazarbellas}\textsc{Gort\'azar Bellas, Francisco; Mart\'inez Unanue, Raquel; Fresno Fern\'andez, Victor}. \textit{Lenguajes de Programaci\'on y Procesadores - Cap\'itulo 3.5}. Editorial Universitaria Ramon Areces, Madrid, 2012. \textsc{ISBN: 9788499610702}.
+	% Item 2
+	\bibitem[Davies, 1992]{davies1992}\textsc{Davies, G. L}. \textit{Pascal-FC: User guide for PC Compatibles}, Version 5, University of Bradford, UK, 1992.
 \end{thebibliography}
 \end{document}
