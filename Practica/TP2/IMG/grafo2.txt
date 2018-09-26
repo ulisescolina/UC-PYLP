@@ -1,0 +1,15 @@
+@startuml grafo2.png
+usecase N0 as "N0\n---\nCC:5"
+usecase N1 as "N1\n---\nCC:5"
+usecase N2 as "N2\n---\nCC:5"
+usecase N3 as "N3\n---\nCC:5"
+usecase N4 as "N4\n---\nCC:1"
+usecase N5 as "N5\n---\nCC:1"
+usecase N6 as "N6\n---\nCC:1"
+(N0) --> (N4)
+(N1) --> (N4)
+(N2) --> (N5)
+(N4) --> (N5)
+(N3) --> (N6)
+(N5) --> (N6)
+@endum
