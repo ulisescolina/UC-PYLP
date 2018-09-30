@@ -1,0 +1,26 @@
+@startuml EJ2.png
+(P0) -> (P1): msj
+(P1) -> (P2): msj
+(P2) -> (P3): msj
+
+newpage
+
+(P0) -> (P1): msj: 1000
+(P1) -> (P2)
+(P2) -> (P3)
+
+newpage
+
+(P0) -> (P1): msj: 1000
+(P1) -> (P2)
+note top of P1: -Recibo 1000\n-Lo almaceno en buzon
+(P2) -> (P3)
+
+newpage
+
+(P0) -> (P1)
+(P1) -> (P2): msj: 1001
+note top of P1: -Defino que mensaje=buzon+1\n-Lo envio al proceso siguiente
+(P2) -> (P3)
+
+@enduml
