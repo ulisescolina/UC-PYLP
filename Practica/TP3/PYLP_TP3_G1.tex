@@ -270,6 +270,28 @@ Para finalizar se muestra una captura con el c\'odigo ejecutado en 4 procesos.
   \label{fig:ej2_captura}
 \end{figure}
 
+\section{Ejercicio 3}
+\label{sec:ej3}
+\textsc{Consigna}: \textbf{adapte el ejercicio 2, al siguiente planteamiento,
+el proceso 0, env\'ia dos mensajes un mensaje \texttt{11111} al proceso 1 y un
+mensaje \texttt{22222} al proceso 2, luego el mensaje \texttt{11111} debe ir
+pasando por los procesos impares y el mensaje \texttt{22222} debe ir pasando
+por los procesos pares.}
+
+\lstinputlisting[caption={Soluci\'on al \texttt{Ejercicio
+\ref{sec:ej3}}},label=lst:mpi3]{codigo/punto_3_mpi.cpp}
+
+A continuacion se presenta una captura de pantalla para la ejecucion del
+\texttt{C\'odigo \ref{lst:mpi3}}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.95\linewidth]{EJ3_Captura}
+  \caption{Captura de pantalla de la ejecuci\'on del \texttt{C\'odigo
+\ref{lst:mpi3}}}
+  \label{fig:ej3_captura}
+\end{figure}
+
 
 
 % === Inicio de anexo === %
@@ -304,7 +326,7 @@ compi() {\
  mpicxx "$archivo" -o "$base"
  echo "Corriendo $base con $nproc proceso(s)"
  echo "============ Inicio Ejecucion ================="
- mpirun -np "$nproc" "$base"
+ mpirun --oversubscribe -np "$nproc" "$base"
  echo "============== Fin Ejecucion==================="
 }
 
