@@ -1,0 +1,41 @@
+@startuml EJ5.png
+usecase P6 as "..."
+(P0) -> (P1): 100
+(P1) -> (P2): 100
+(P2) -> (P3): 100
+(P3) -> (P4): 100
+(P4) -> (P5): 100
+(P5) -> (P6): 100
+(P6) -> (P7): 100
+(P7) --> (P0): 100
+
+newpage
+
+usecase P6 as "..."
+left to right direction
+(P0) -> (P1)
+(P1) -> (P2)
+(P2) -> (P3)
+(P3) -> (P4)
+(P4) -> (P5)
+(P5) -> (P6)
+(P6) -> (P7)
+(P7) -> (P0)
+(P0) <.. (P1)
+(P1) <.. (P2)
+(P2) <.. (P3)
+(P3) <.. (P4)
+(P4) <.. (P5)
+(P5) <.. (P6)
+(P6) <.. (P7)
+(P7) <.. (P0)
+
+newpage
+
+usecase P1 as "Pa"
+usecase P2 as "Pb"
+usecase P3 as "Pa"
+usecase P4 as "Pb"
+(P1) -> (P2): 100
+(P3) .> (P4): 200
+@enduml
