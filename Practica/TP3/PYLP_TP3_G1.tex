@@ -292,6 +292,35 @@ A continuacion se presenta una captura de pantalla para la ejecucion del
   \label{fig:ej3_captura}
 \end{figure}
 
+\section{Ejercicio 4}
+\label{sec:ej4}
+\textsc{Consigna}: \textbf{escribir un algoritmo que lanzando \texttt{N}
+procesos se genere un vector de tamaño \texttt{N}. Este vector debe ir
+pasandose entre los procesos y cada proceso deber\'a rellenar en la posicion
+del vector de su n\'umero de rango, su numero de rango si el proceso tiene
+rango impar y con su numero de rango negativo si el proceso tiene numero de
+rango par.}\\
+
+En primera instancia, a la hora de la realización del
+ejercicio una cuesti\'on no quedo del todo clara, esta cuesti\'on tiene que
+ver con que si hay que imprimir el estado del vector en cada proceso, es
+decir, que cada proceso reporte el estado del vector cuando \'este opere en
+\'el, as\'i que se decidi\'o dar la responsabilidad de la comunicaci\'on del
+estado del vector al \'ultimo proceso que manipule a dicho arreglo.
+
+A continuaci\'on se presenta el c\'odigo para la solucion del \texttt{Ejercicio
+\ref{sec:ej4}} junto con una captura de pantalla de la ejecuci\'on del c\'odigo.
+
+\lstinputlisting[caption={Soluci\'on al \texttt{Ejercicio
+\ref{sec:ej4}}},label=lst:mpi4]{codigo/punto_4_mpi.cpp}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.95\linewidth]{EJ4_Captura}
+  \caption{Captura de pantalla de la ejecuci\'on del \texttt{C\'odigo
+\ref{lst:mpi4}}}
+  \label{fig:ej4_captura}
+\end{figure}
 
 
 % === Inicio de anexo === %

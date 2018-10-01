@@ -1,6 +1,6 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/Arch Linux) (preloaded format=xelatex 2018.9.25)  30 SEP 2018 20:31
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/Arch Linux) (preloaded format=xelatex 2018.9.25)  1 OCT 2018 03:58
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **PYLP_TP3_G1.tex
 (./PYLP_TP3_G1.tex
@@ -149,9 +149,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--41
 
 (./PYLP_TP3_G1.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 5.
+(Font)              <7> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 5.
+(Font)              <5> on input line 6.
 )
 \tf@toc=\write3
 \openout3 = `PYLP_TP3_G1.toc'.
@@ -198,21 +198,29 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
  (./codigo/punto_3_mpi.cpp [7])
 File: IMG/EJ3_Captura.png Graphic file (type bmp)
 <IMG/EJ3_Captura.png>
- [8] [9]
+ [8]
+Underfull \hbox (badness 10000) in paragraph at lines 297--303
+
+ []
+
+(./codigo/punto_4_mpi.cpp [9] [10])
+File: IMG/EJ4_Captura.png Graphic file (type bmp)
+<IMG/EJ4_Captura.png>
+ [11]
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2018/09/02 1.7 listings language file
 )
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2018/09/02 1.7 listings language file
-) [10] [11]
+) [12] [13]
 (./PYLP_TP3_G1.aux) ) 
 Here is how much of TeX's memory you used:
- 3438 strings out of 492962
- 52247 string characters out of 6139097
+ 3460 strings out of 492962
+ 52571 string characters out of 6139097
  353159 words of memory out of 5000000
- 7406 multiletter control sequences out of 15000+600000
+ 7423 multiletter control sequences out of 15000+600000
  6512 words of font info for 40 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  40i,6n,67p,215b,1533s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on PYLP_TP3_G1.pdf (13 pages).
+Output written on PYLP_TP3_G1.pdf (15 pages).
