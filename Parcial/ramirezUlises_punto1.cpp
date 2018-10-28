@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 	/* Busqueda de temperatura maxima */
 	max_local = temperaturas_local[0];
 	for (i=1; i < cant_distribuir; i++) {
-		if (temperaturas_local[i] > temperaturas_local[i-1]) {
+		if (temperaturas_local[i] > max_local) {
 			max_local = temperaturas_local[i];
 		}
 	}
