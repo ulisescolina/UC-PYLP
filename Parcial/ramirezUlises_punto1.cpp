@@ -14,8 +14,7 @@ const int LIM_SUP_ALEATORIO=31;
 * Utilidad para imprimir el vector
 * @param *vec puntero con la posicion
 *		del arreglo en memoria.
-* @param t cantidad de procesos solicitados
-*		al entorno MPI
+* @param tam cantidad de elementos a imprimir
 */
 void imprimir_vector(int *vec, int tam) {
 	int i=0;
@@ -77,7 +76,7 @@ int main(int argc, char *argv[])
 			max_local = temperaturas_local[i];
 		}
 	}
-
+	cout<<"Temp. Maxima calculada en P"<<id<<": "<<max_local<<endl;
 	MPI_Reduce(
 			&max_local,/*Buffer local que se quiere reducir*/
 			&max,/*Buffer en el que se guarda la operacion de reduccion*/
