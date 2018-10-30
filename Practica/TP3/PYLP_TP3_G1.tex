@@ -322,6 +322,81 @@ A continuaci\'on se presenta el c\'odigo para la solucion del \texttt{Ejercicio
   \label{fig:ej4_captura}
 \end{figure}
 
+\section{Ejercicio 5}
+\label{sec:ej5}
+\textsc{Consigna}: \textbf{se tiene un algoritmo que env\'ia un mensaje
+\texttt{100} haia los procesos superiores y al llegar al \'ultimo nodo
+reenv\'ia al proceso \texttt{0}, tal como se muestra en la \texttt{Figura
+\ref{fig:ej5:a}} y se slicita que se adapte el c\'odigo para que aparte del
+mensaje \texttt{100}, se env\'ie un mensaje \texttt{200} que se dirija en
+direcci\'on contraria, como se demuestra en la \texttt{Figura
+\ref{fig:ej5:b}}}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.60\linewidth]{EJ5}
+  \caption{Algoritmo brindado por la c\'atedra para el \texttt{Ejercicio
+\ref{sec:ej5}}}
+  \label{fig:ej5:a}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.60\linewidth]{EJ5_001}
+  \caption{Transformaci\'on objetivo teniendo como base \texttt{Figura
+\ref{fig:ej5:a}}}
+  \label{fig:ej5:b}
+\end{figure}
+
+Teniendo en cuenta los siguientes valores para las lineas continuas y
+discontinuas respectivamente
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.40\linewidth]{EJ5_002}
+  \caption{Referencia de valores para \texttt{Figura \ref{fig:ej5:b}}}
+  \label{fig:ej5:c}
+\end{figure}
+
+En el \texttt{C\'odigo \ref{lst:mpi5:catedra}} se brinda la implementaci\'on del
+algoritmo para la implementaci\'on de la \texttt{Figura \ref{fig:ej5:a}}
+
+\lstinputlisting[caption={Implementaci\'on del algoritmo conceptualizado en
+\texttt{Figura \ref{fig:ej5:a}}},label=lst:mpi5:catedra]{codigo/punto_5_catedra_mpi.cpp}
+
+la pr\'oxima acci\'on sera realizar la transformaci\'on de \texttt{C\'odigo
+\ref{lst:mpi5:catedra}} para que cumpla con lo requerido en la \texttt{Figura
+\ref{fig:ej5:b}}.
+
+
+\lstinputlisting[caption={Transformaci\'on del \texttt{C\'odigo
+\ref{lst:mpi5:catedra}} a lo planteado por la \texttt{Figura \ref{fig:ej5:b}}},
+label=lst:mpi5:t]{codigo/punto_5_t_mpi.cpp}
+
+Se adjunta ademas una captura con la salida de la transfomaci\'on realizada en
+el \texttt{C\'odigo \ref{lst:mpi5:t}}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.90\linewidth]{EJ5_captura}
+  \caption{Salida de la ejecuci\'on de \texttt{C\'odigo \ref{lst:mpi5:t}}}
+  \label{fig:ej5:captura}
+\end{figure}
+
+\section*{MPI\_Reduce, MPI\_Gather, MPI\_Scatter,\\MPI\_Broadcast}
+\section{Ejercicio 6}
+\label{sec:ej6}
+\textsc{Consigna}: \textbf{resuelva el ejercicio planteado en la p\'agina de la
+\cite{unigranada} con respecto al tutorial 4 - Producto Escalar:
+\begin{itemize}
+\item Mostrar las capturas de pantallas de la ejecuci\'on del ejercicio.
+\item Explique brevemente como funciona el c\'odigo fuene.
+\item Describa las instrucciones propias de MPI utilizadas para el presente
+ejercicio. ¿Cu\'ales son los par\'ametros de entrada?¿Cu\'ales son los
+par\'ametros de salida?
+\end{itemize}}
+
+
 
 % === Inicio de anexo === %
 \newpage
@@ -374,7 +449,7 @@ Una peculiaridad a tener en cuenta, es la forma en la que \texttt{compi()}
 trata al archivo, este busca en las primeras 10 lineas una cadena que contenga
 lo siguiente: ``NUM\_PROC=\textit{numero\_de\_procesos}'' y lo recuerda. Luego de
 ralizar la compilaci\'on del c\'odigo, ejecuta al archivo resultante de
-la compilaci\'on mediante \texttt{mpirun -np \textit{«numero\_de\_procesos»
+la compilaci\'on mediante \texttt{mpirun --oversubscribe -np \textit{«numero\_de\_procesos»
 «nombre\_archivo»}} (de no encontrar una expresi\'on con esas caracter\'isticas,
 procede a ejecutar el archivo compilado con un solo proceso), lo cual hace que compilaci\'on y
 ejecuci\'on se realicen en un solo paso para el usuario.
