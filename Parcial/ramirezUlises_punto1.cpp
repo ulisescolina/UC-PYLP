@@ -9,6 +9,7 @@ using namespace std;
 
 const int LIM_INF_ALEATORIO=15;
 const int LIM_SUP_ALEATORIO=31;
+const int INDICE_MULTI=10;
 
 /*
 * Utilidad para imprimir el vector
@@ -41,7 +42,7 @@ void carga_vector(int *v, int tam) {
 
 int main(int argc, char *argv[])
 {
-	int tamanio, id, cant_distribuir=10, i, max, max_local=0;
+	int tamanio, id, cant_distribuir=INDICE_MULTI, i, max, max_local=0;
 	double promedio_temperaturas=0;
 	MPI_Status estado;
 
@@ -49,7 +50,7 @@ int main(int argc, char *argv[])
 	MPI_Comm_size(MPI_COMM_WORLD, &tamanio);
 	MPI_Comm_rank(MPI_COMM_WORLD, &id);
 
-	int CANT_TEMPERATURAS = tamanio*10;
+	int CANT_TEMPERATURAS = tamanio*INDICE_MULTI;
 	int temperaturas[CANT_TEMPERATURAS], temperaturas_local[cant_distribuir];
 
 	if (id == 0) {
