@@ -23,12 +23,12 @@ delgado(Persona) :- altura(Persona, Altura),
 normal(Persona) :- peso(Persona, Peso),
 	                 altura(Persona, Altura),
 									 imc(Altura, Peso, X),
-									 X > 18.5, X < 24.9.
+									 X >= 18.5, X =< 24.9.
 
 sobrepeso(Persona) :- peso(Persona, Peso),
 	                 altura(Persona, Altura),
 									 imc(Altura, Peso, X),
-									 X > 25, X < 30.
+									 X >= 25, X =< 30.
 
 obeso(Persona) :- peso(Persona, Peso),
 	                 altura(Persona, Altura),
