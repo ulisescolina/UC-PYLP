@@ -1,0 +1,65 @@
+\documentclass{IEEEcsmag}
+\usepackage[colorlinks,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[spanish]{babel}
+\usepackage{upmath}
+\usepackage[
+  sorting=none,
+  backend=biber,
+  style=ieee,
+]{biblatex}
+\addbibresource{./bibliografia.bib}
+
+% Glosario
+\usepackage[acronym]{glossaries}
+\makeglossaries
+
+% Bordes
+\usepackage{tcolorbox}
+
+% \jvol{XX}
+% \jnum{XX}
+% \paper{8}
+\jmonth{Julio}
+\jname{Paradigmas y Leguajes de Programación}
+\pubyear{2021}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+
+\setcounter{secnumdepth}{0}
+\begin{document}
+\title{
+  \input{info/titulo.tex} \newline
+  \huge{{\it \input{info/subtitulo.tex}}}
+}
+\author{\input{info/nombre_autor.tex}}
+      \affil{FCEQyN\\
+      \input{info/institucion.tex}\\
+      \input{info/correo.tex}
+  }
+
+\renewcommand{\abstractname}{Resumen} % Cambiamos el titulo, en vez de
+\begin{abstract}
+  \input{cuerpo/resumen.tex}
+  \newline\newline
+  \textit{\input{./keywords.tex}}
+\end{abstract}
+
+\maketitle
+
+\chapterinitial{Parte I} % Inicia secciones en el doc
+                              % con un titulo más grande
+%--- Cuerpo -------
+\input{cuerpo/introduccion.tex} % el bloque con csquotes mata la compilacion
+\input{cuerpo/big_data.tex}
+\input{cuerpo/procesamiento_paralelo.tex}
+\input{cuerpo/procesamiento_distribuido.tex}
+\printbibliography
+%--- Glosario ---
+\clearpage
+\input{glosario.tex}
+\chapterinitial{Lista de términos}
+\printglossary[type=\acronymtype, style=altlist] % Si no esta este no imprime los acrónimos
+\printglossary[style=altlist] % Si no esta este con el anterior no imprime los términos del glosario
+%----------------
+\end{document}
+

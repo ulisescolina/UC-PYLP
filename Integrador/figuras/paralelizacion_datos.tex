@@ -1,0 +1,18 @@
+\begin{figure}[h]
+  \centering
+  \label{fig:paralelizacion_datos}
+  \resizebox{!}{5cm}{%
+    \begin{tikzpicture}
+      % Dato
+      \draw (0,4.75) rectangle (5,8.75) node[midway,blue]{\texttt{Datos}: $1,2,3,4,5,6,7,8,9,10$};
+
+      % Datos
+      \draw (9, 10) rectangle(10.5,11.5) node[midway,blue]{$1,2$};
+      \draw (9, 8) rectangle (10.5,9.5) node[midway,blue]{$3,4$};
+      \draw (9, 6) rectangle (10.5,7.5) node[midway,blue]{$5,6$};
+      \draw (9, 4) rectangle (10.5,5.5) node[midway,blue]{$7, 8$};
+      \draw (9, 2) rectangle (10.5,3.5) node[midway,blue]{$9, 10$};
+    \end{tikzpicture}
+  }
+  \caption{Concepto paralelización de datos}
+\end{figure}

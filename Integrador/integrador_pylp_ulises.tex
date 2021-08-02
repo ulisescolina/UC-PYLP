@@ -1,0 +1,82 @@
+\documentclass[11pt]{diazessay} % Font size (can be 10pt, 11pt or 12pt)
+% Ecuaciones
+\usepackage{amsmath}
+% Graficos
+\usepackage{tikz}
+% Bordes
+\usepackage{tcolorbox}
+% Bibliografía
+\usepackage[
+  sorting=none,
+  backend=biber,
+  style=numeric-comp,
+]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% Referencias cliqueables
+\usepackage{hyperref}
+\hypersetup{colorlinks=false}
+
+% Glosario
+\usepackage[acronym]{glossaries}
+\makeglossaries
+
+% csquotes
+\usepackage{csquotes}
+%---- Sección de título -----
+\title{
+  \textbf{\input{info/titulo.tex}} \\
+  {\Large\itshape\input{info/subtitulo}}
+} % Titulo y subtitulo
+
+\author{
+  \textbf{\input{info/nombre_autor.tex}} \\
+  \textit{\input{info/institucion.tex}}\\
+  \small\tt\input{info/correo.tex}
+} % Autor, institución y contacto
+\date{} % Date, use \date{} for no date
+%---- Sección de título ----
+
+%--------------------------------
+
+\begin{document}
+\input{notas.tex} % Notas con respecto al historial de versiones
+\maketitle % Print the title section
+
+\renewcommand{\abstractname}{Resumen} % Cambiamos el titulo, en vez de
+% decir 'Abstract' va a pasar a decir 'Resumen'
+\begin{abstract}
+  \input{cuerpo/resumen.tex}
+  \newline\newline
+  \textit{\input{./keywords.tex}} 
+\end{abstract}
+\vspace{30pt} % Vertical whitespace between the abstract and first section
+
+%--- Cuerpo -------
+\input{cuerpo/introduccion.tex}
+\input{cuerpo/big_data.tex}
+\input{cuerpo/procesamiento_paralelo.tex}
+\input{cuerpo/procesamiento_distribuido.tex}
+%--- Fin Cuerpo ---
+
+%- Bibliografía -
+\clearpage
+% \printbibheading
+% \printbibliography[type=article, heading=subbibliography, title={Articulos}]
+% \printbibliography[type=book, heading=subbibliography, title={Libros}]
+% \printbibliography[type=online, heading=subbibliography, title={Recursos en
+% línea}]
+\printbibliography
+%----------------
+
+%--- Glosario ---
+% \clearpage
+\clearpage
+\input{glosario.tex}
+\printglossary[type=\acronymtype] % Si no esta este no imprime los acrónimos
+\printglossary % Si no esta este con el anterior no imprime los términos del glosario
+%----------------
+
+\input{anexos/petabytes_a_zettabytes.tex}
+
+\end{document}

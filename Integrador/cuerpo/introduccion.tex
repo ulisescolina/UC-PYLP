@@ -1,0 +1,72 @@
+\section{Introducción} \label{sec:introduccion}
+% Se dice que se ganó interés en los datos y el volumen de generación de los
+% mismos, como así tambien los desafíos que proponen.
+El manejo de gran cantidad de datos ha ganado atención en los últimos
+años\cite{newvantage2019},
+esto surge a raíz del ritmo acelerado que se generan estos datos y los 
+diferentes escenarios que surgen a la hora de asegurar\cites{rawat2019,
+kantarcioglu2019}, procesar (lo que se discute en este documento, aunque este a
+su vez se basa en muchos que van ser citados) y almacenar\cites{padgavankar2014, agrawal2016, hongming2017}
+los mismos.
+
+
+% Se relaciona la cantidad de personas en el mundo y sus actividades con el
+% creciente volumen de generación de datos
+En la actualidad existen mas de 7.8 mil millones de habitantes en el planeta\cite{world2021}, 
+un porcentaje considerable de esos habitantes son usuarios de internet como
+describe Meeker\cite{meeker2019}. Aunque es cierto que la generación de datos viene 
+tomando una tendencia creciente desde hace ya años \cite{lyman2003},
+parte de este crecimiento abrupto de la última decada se puede atribuir, en parte,
+al gran papel que la tecnología
+fué adquiriendo con el pasar de los años y su constante evolución: comercio electrónico, publicidad
+electrónica, pagos electrónicos, etc.\cite{meeker2019,pellicer2019},
+las personas conectadas con varios dispositivos (\gls{wearables}, dispositivos \acrshort{iot},
+celulares «especial énfasis», televisores, etc.), sensores produciendo una
+ráfaga continua de datos, el avance y la gran disponibilidad de las 
+redes móviles de cara a las redes de siguiente generación
+(5g)\cite{sultan2018}, dan como resultado una enorme cantidad de datos.
+
+% Se introduce el término "Big Data"
+Esta enorme cantidad de datos acuño un nombre con el pasar de los años, el
+término es \textit{big data}.
+
+Shönberger y Culkier\cite{shonberger2016} brindan una síntesis concreta de lo
+que es big data, sin embargo, como los mismos autores lo mencionan,
+esto no es nada mas que el inicio.
+
+\begin{displayquote}
+    ``Datos masivos, o cosas que se pueden hacer a gran
+    escala, pero no a una escala inferior, con el fin de extraer nuevas
+    percepciones o crear formas de valor de tal forma que se transformen los
+    mercados.''
+\end{displayquote}
+
+Transformar estos datos en valor viene ya llevándose a cabo hace décadas,
+caracterizado con términos que fueron cambiando con el tiempo, conmunmente denominado
+\textit{inteligencia de negocios} (\acrshort{bi}) sobre el cual hay extensa literatura y
+gran variedad de escenarios en los que se aplicó el mismo con diferentes
+enfoques\cites{britos2008, qazi2014, su2021, khozium2020, vaclav2021, phillips-wren2021, schwade2021}.
+El big data, toma estos principios de la inteligencia de negocios y los aplica a una escala mayor.
+
+Aquí, se explora el procesamiento del big data, los desafíos
+en cuanto a procesamiento que surgieron y siguen surgiendo (aunque
+también se mencionan brevemente algunas cuestiones relacionadas con los
+desafíos que intervienten con la seguridad y el almacenamiento de la
+información), los enfoques a la hora de tratar de encontrar valor a una
+cantidad de datos masivo teniendo en cuenta diferentes atributos con los que
+cuentan. 
+
+% \subsection{Problemática}
+% \label{sec:problematica}
+
+En la sección \ref{sec:big_data} se describe en mayor profundidad lo que
+significa el big data y cuales son sus características predominantes, es decir,
+cuando alguien considera algo como big data, en la sección \ref{sec:procesamiento_paralelo} se
+introduce lo que es el procesamiento paralelo, se hace especial énfasis
+en cómo éste permite el tratamiento de los datos haciendo uso eficiente
+de todos los recursos. A partir de ahí, en la sección 
+\ref{sec:procesamiento_distribuido} se aplica esta idea de utilización
+eficiente de los recursos y se los traslada a
+un entorno mayor no limitado a una máquina y con un nivel de acoplamiento
+inferior.
+

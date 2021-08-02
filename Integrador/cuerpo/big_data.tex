@@ -1,0 +1,46 @@
+\section{Big Data}
+\label{sec:big_data}
+
+Definir \textit{¿Qué es el big data?} es un trabajo no trivial, anteriormente, se brindó
+un concepto que pretendía dar al lector un primer acercamiento al tema, sin
+embargo este carece de completitud y especificidad. En
+la literatura se demuestra que términos difusos como `grande' hacen aun más
+difícil el determinar qué es y qué no es big data, esto supone tener que
+definir variables que se van a tomar en cuenta en diferentes disciplinas con el
+fin de poder determinar `¿Qué tan grande tiene que ser algo para ser grande?'.
+
+La caracterización principal del big data y por lo tanto la respuesta a la
+pregunta anterior se tiene en lo que la literatura llama \textit{las 3
+Vs}\footnote{Existen autores que consideran que son
+4\textit{V}s\cite{wibowo2019, ghasemaghaei2019}, 5\textit{V}s
+\cites{hitzler2013, yin2015}, e incluso autores que
+consideran más \textit{V}s~\cite{bonner2017}. Sin embargo, cabe
+destacar que estas dos opiniones incluyen las 3\textit{V}s mencionadas
+anteriormente.}\cites{bd_ibm, bd_aws, bd_oracle}. Antes de continuar con las \textit{V}s, es conveniente realizar una
+aclaración importante: En algunos casos la definición o caracterización aceptada del big data
+con las \textit{V}s \textit{no es aplicable}, por ejemplo, en el ámbito de la medicina, Baro {\it et. al}
+\cite{baro2015} determinan que la cantidad de datos necesarios para ser grande
+se satisface si se cumple que,
+
+\input{cuerpo/ecuaciones/baro2015-1.tex}
+
+En este caso específico analiza el significado de ¿Qué es ser big data? para un
+área en particular, \textit{la medicina}\footnote{cabe destacar que no es posible asumir que este
+análisis llevado a cabo por los autores es trasladable a todas las
+disciplinas}, aquí se busca enfocar y delimitar el concepto de
+grande al área de la salud. El motivo principal detrás de esto es que luego de
+estudiar los diferentes casos (entendiendo como \textit{casos} las
+publicaciones en revistas científicas orientadas exclusivamente a la medicina)%a la hora de trabajar con los datos dentro de
+en un ambiente orientado a la salud, no se satisfacen los criterios de
+masividad\footnote{Comparado con la cantidad de consultas que recibe Google, la
+cantidad de reseñas escritas en Amazon, la cantidad de comentarios que se
+publican en Twitter, etc.}, pero aún así existe en el corpus material acerca
+del big data asociado a la medicina, por lo que se hace útil poseer una
+definición mas ajustada a dicha disciplina.
+
+
+\input{cuerpo/big_data_volume.tex}
+\input{cuerpo/big_data_variety.tex}
+\input{cuerpo/big_data_velocity.tex}
+
+% Alguna conclusión probablemente para el tema de BD

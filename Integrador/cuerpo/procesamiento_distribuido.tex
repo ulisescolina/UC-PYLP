@@ -1,0 +1,16 @@
+\section{Procesamiento Distribuido}
+\label{sec:procesamiento_distribuido}
+
+Este tiene muchas similitudes con los sistemas de Procesamiento Paralelo, es
+más, es válido decir que los Sistemas Paralelos y los Sistemas Distribuidos son
+un entrelazamiento de redes, que tienen la caracteristica de ser
+continuas\footnote{
+o un \gls{continuum} de redes.
+\url{https://dictionary.cambridge.org/es/diccionario/ingles/continuum}}, lo que
+significa que el parámetro que determina si el sistema es distribuido es el promedio de
+distancias entre los nodos de procesamiento~\cite{hyde98}. El desafío que
+propone Hyde, y también diferencia a los dos sistemas es el de poder determinar el
+estado exacto de todo el sistema. Este es un desafío no-trivial, ya que dicho
+estado no puede ser computado
+instantaneamente por el hecho de que cada operación dentro de la red podría
+requerir travesías por la misma.
