@@ -1,0 +1,16 @@
+*.acn
+*.acr
+*.alg
+*.aux
+*.blg
+*.bbl
+*.bcf
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.log
+*.out
+*.run.xml
+
