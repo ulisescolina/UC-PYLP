@@ -14,3 +14,35 @@ estado exacto de todo el sistema. Este es un desafío no-trivial, ya que dicho
 estado no puede ser computado
 instantaneamente por el hecho de que cada operación dentro de la red podría
 requerir travesías por la misma.
+
+Esta caracteristica mencionada hace que sea muy complicado establecer una unica
+definición de que significa un sistema distribuido. Para el propósito del
+documento se hace útil una definición brindada por 
+Tanenbaum \textit{et. al.}~\cite{tanenbaum2007a}, la cual sugiere que,
+
+\begin{displayquote}
+  ``Un sistema distribuido es una colección de computadoras independientes que
+  parecen ser un único sistema coherente ante los usuarios.''
+\end{displayquote}
+
+Aquí hay dos cuestiones extremadamente importantes que son de interés para el
+documento. La primera, se habla de una \textit{colección de computadoras} y se
+hace énfasis en el hecho de que estos ordenadores son independientes, lo cual
+llevan a otro aspecto a considerar para esta colección de máquinas, el hecho de
+que son \textit{fácilmente escalables} y \textit{tolerante a fallos}. La
+segunda, se habla de los usuarios ya sea que se esté hablando de \textit{personas
+o programas} y como para estos es transparente el hecho de que están lidiando con
+un sistma distribuido, es decir, estos tienen la sensación de utilizar un
+sistema compuesto por un único ordenador.
+
+Además de estas dos cuestiones que se hacen presentes en la definición
+presentada, existen otros aspectos dentro de los sistemas distribuidos que
+son importantes para el estudio de los mismos en profundidad, sin embargo, no es el
+objetivo de este documento estudiar los sistemas distribuidos en profundidad,
+a continuación se presenta un punto de referencia para que el
+lector pueda seguir estudiando a los sistemas distribuidos y sus diferentes
+aspectos, características y desafíos los cuales no son
+pocos~\cite{tanenbaum1994, tanenbaum2007, siberschatz2013}.
+
+\printbibliography[keyword={recomendacion_sistemas_distribuidos}, title={Referencias para 
+el estudio de Sistemas Distribuidos}]
