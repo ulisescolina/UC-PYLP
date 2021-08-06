@@ -1,0 +1,35 @@
+\section{MapReduce}
+\label{ssec:mapreduce}
+
+En las secciones anteriores, se habló de Procesamiento Paralelo y Distribuido,
+se mencionaron algunas características (particularmente las más afínes a este
+documento), en esta sección, se busca aplicar las cuestiones que se mencionaron
+con anterioridad, y empezamos a hablar del núcleo del documento
+\textit{MapReduce}.
+
+MapReduce (\acrshort{mr}), es un modelo de programación; una forma de hacer las cosas; un
+paradigma. Este modelo fue introducido por Google en la primer mitad del
+2000~\cite{dean2004} y la implementación del mismo se asocia con grandes 
+\glspl{dataset} y es
+aplicable a una gran cantidad de tareas del mundo real~\cite{dean2008}. En esta
+sección se avanza sobre una introducción acerca del modelo que presenta
+MapReduce y 
+luego se aplicarán los conceptos en una de las varias herramientas que aplican
+el modelo en cuestion, la herramienta a la que se hacer referencia es un 
+\Gls{framework} para Big Data, su nombre es 
+\textit{Hadoop}\includegraphics[height=10pt]{figuras/logos/hadoop_logo.png}.
+
+\subsection{Funciones \texttt{Map} y \texttt{Reduce}}
+
+\paragraph{Un vistazo general:}
+en este modelo los usuarios que implementan \acrshort{mr} definen dos
+funciones principales, una función \textit{Map} y una función \textit{Reduce},
+el sistema que da soporte a la aplicación implementada se encarga de
+paralelizar la ejecución de la misma a lo largo y ancho de un sistema
+distribuido (\gls{cluster}) de ordenadores, este \gls{cluster} cuenta con las
+características de los sistemas distribuidos mencionados en la sección
+\ref{sec:procesamiento_distribuido}. Sistemas como estos permiten que Google
+(en el 2008) pueda procesar 20\acrshort{pb} por día~\cite{dean2008}.
+
+\input{cuerpo/MapReduce_map.tex}
+\input{cuerpo/MapReduce_reduce.tex}
