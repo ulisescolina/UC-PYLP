@@ -4,6 +4,8 @@ IEEE=$(DOCNAME)-IEEE
 
 all: compilarart
 
+ctodo: compilarart compilari3e
+
 compilarart: art glosarioart
 	echo -e "Finalizó la compilación del documento."
 
