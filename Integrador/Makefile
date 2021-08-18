@@ -16,13 +16,13 @@ compilarl: art glosarioart limpiar
 	echo -e "Finalizó la compilación del documento."
 
 art:
-	pdflatex $(articulo).tex
+	pdflatex -shell-escape $(articulo).tex
 	biber $(articulo)
-	pdflatex $(articulo).tex
+	pdflatex -shell-escape $(articulo).tex
 
 glosarioart:
 	makeglossaries $(articulo)
-	pdflatex $(articulo).tex
+	pdflatex -shell-escape $(articulo).tex
 
 i3e:
 	pdflatex $(IEEE).tex
@@ -37,6 +37,7 @@ glosarioi3e:
 
 limpiar:
 	rm *.acn *.acr *.alg *.aux *.blg *.bbl *.bcf *.glg *.glo *.gls *.glsdefs *.ist *.log *.out *.run.xml
+	rm -rf _minted-integrador_pylp_ulises
 
 ver: art glosarioart limpiar
 	# xdg-open abre el documento con la aplicación preferida
