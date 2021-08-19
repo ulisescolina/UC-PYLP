@@ -1,8 +1,18 @@
 \clearpage
 \section*{Anexo: Implementación sobre HDFS}
 
-En esta sección de anexo se presenta la implementación completa del ejemplo
-sobre un cluster \acrshort{hdfs}. En este anexo no se cubre la
+En esta sección de anexo se presenta la implementación del ejemplo
+explicado en la sección \ref{sec:hadoop} {\it Hadoop}. 
+
+\paragraph{Que se cubre en este anexo:}
+En este anexo se cubren,
+las partes necesarias en el código además de las clases mapper y reducer
+explicadas, los paquetes necesarios, la forma de compilación, la forma de
+ejecutar el paquete compilado sobre un cluster y se incluyen además los
+resultados de una demo realizada sobre un \gls{cluster}.
+
+\paragraph{Que no se cubre en este anexo:}
+En este anexo no se cubre la
 instalación/configuración del \gls{cluster} Hadoop. Cabe mencionar que es
 posible comprar poder de cómputo a proveedores como Amazon\footnote{\url{https://aws.amazon.com/es/emr/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc}} o
 Microsoft\footnote{\url{https://docs.microsoft.com/en-us/samples/azure-samples/durablefunctions-mapreduce-dotnet/big-data-processing-serverless-mapreduce-on-azure/}}
@@ -10,4 +20,189 @@ y tener funcionando un cluster Hadoop en minutos, sin ninguna configuración,
 esperando a que se le adjunten trabajos a realizar y datos sobre los cuales
 realizar los trabajos.
 
+\subsection*{Partes necesarias además del Mapper y Reducer}
+En los ejemplos, únicamente se mencionaron las clases Mapper y Reducer, estas
+los objetos de estas clases son las que se distribuyen a los diferentes nodos
+workers para que puedan procesar los datos, sin embargo, faltan más partes para
+que este ejemplo pueda compilar. El ejemplo completo puede ser encontrado en
+el repositorio que se encuentra en la siguiente nota al pie de
+página%\footnote{ TODO: Agregar el repositorio una vez los suba}
+
+\input{cuerpo/codigo/lst_hadoop_anexo_partes_necesarias.tex}
+
+En el listing \ref{listing:word_count} se pueden notar dos cuestiones que
+resaltan y que son completamente necesarias a la hora de construir un Mapper y
+un Reducer para trabajar, no solamente sobre el \Gls{framework} Hadoop
+MapReduce, sino que también algo necesario para los proyectos de Java.
+
+Primero se atiende lo segundo, lo de un proyecto Java. Un proyecto Java siempre
+tiene este punto de inicio llamado el método {\tt main()} que se encuentra
+dentro de una clase objetivo para el compilador. En este caso, la clase
+objetivo se define como {\tt WordCount}, dentro de esta se tienen a las
+implementaciones del mapper y el reducer, y además se cuenta con el método
+main que juega un rol importante en la primera parte del argumento de
+{\it cuestiones necesarias para trabajar sobre el \gls{framework} Hadoop}.
+Estas cuestiones necesarias tienen que ver con las acciones necesarias para
+poder comunicarle al cluster las clases que extienden de Mapper y Reducer, la
+creación de un ``trabajo'' y determinar de dónde sacar el input y hacia donde
+mandar el output una vez terminado el trabajo, todo esto se implementa (en este
+ejemplo en particular) en el método {\tt main()}.
+
+\subsection*{Paquetes necesarios}
+Se puede notar que en diferentes partes de los listings
+\ref{listing:hadoop_mapper}, \ref{listing:hadoop_reducer} y
+\ref{listing:word_count} se hace uso de diferentes clases que no se encuentran
+definidas en ningun sitio en el código presentado, por ejemplo se tienen a las
+clases más prominentes ya mencionadas, como {\tt Mapper} y {\tt Reducer}, pero
+también notar que se tienen otras clases y tipos no nativos de Java que son
+también implementaciones
+de Hadoop, estos son {\tt Configuration}, {\tt Job}, {\tt FileInputFormat},
+{\tt FileOutputFormat}, {\tt IntWritable}, etc. En el listing
+\ref{listing:paquetes_a_incluir} se lista la forma sintácticamente correcta de
+incluir los paquetes específicos de Hadoop.
+
+\input{cuerpo/codigo/lst_hadoop_anexo_paquetes_necesarios.tex}
+
+\subsection*{Compilación}
+Una vez que se tiene implementado el Mapper y el Reducer, se tiene definida la
+clase que los envuelve y definida claramente las clases que se deben distribuir 
+entre los {\it workers} para un trabajo determinado,
+queda armar el paquete que en última instancia será ejecutado sobre el
+\gls{framework} sobre el \gls{cluster}, en este caso, será armar un paquete
+{\tt \acrshort{jar}}.
+
+Acá se definen dos formas de realizar este procedimiento.
+
+\subsubsection*{Desde Hadoop}
+Hadoop, cuenta con las herramientas para realizar la compilación de un
+proyecto, sin embargo este proceso nos dará unicamente el bytecode que puede
+correr sobre una \acrlong{jvm} (\acrshort{jvm}), por lo que serán necesarios
+dos pasos para la compilación exitosa de un proyecto.
+
+\begin{minted}{bash}
+\$ hadoop com.sun.tools.javac.Main WordCount.java
+\end{minted}
+
+Siendo {\tt WordCount.java} el archivo que contiene el proyecto. una vez
+terminado este procedimiento, es necesario empaquetar los archivos resultantes
+en un \acrshort{jar}, esto se logra de la siguiente manera.
+
+\begin{minted}{bash}
+\$ jar cf wc.jar WordCount*.class 
+\end{minted}
+
+Este último paso resultará en un archivo denominado {\tt wc.jar}. El cual
+contendrá el proyecto compilado y listo para ser ejecutado sobre el
+\gls{cluster}
+
+\subsubsection*{Proyecto Maven}
+Esta segunda opción utiliza un método de construcción ampliamente aceptado y
+reconocido en la comunidad de desarrolladores Java, el proyecto 
+Maven\footnote{https://maven.apache.org/}, esta es una herramienta acompaña al 
+desarrollador Java a lo largo del ciclo de vida del software. Este ejemplo
+asume que existe una instalación configurada de Maven.
+
+En el ejemplo que se lista a continuación, se está utilizando un concepto dentro
+de Maven llamado
+{\it Archetype}\footnote{https://maven.apache.org/archetype/index.html}, lo
+que, en pocas palabras, permite que se cree la estructura de un proyecto a partir de
+una plantilla existente, y el resultado está listo para la compilación.
+
+\begin{minted}{bash}
+\$ mvn archetype:generate \
+-DgroupId=com.pylp.integrador \
+-DartifactId=hadoop-integrador \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=false
+\end{minted}
+
+Este comando, crea la estructura de un proyecto Java listo para ser compilado.
+El subdirectorio {\tt src} contiene el código necesario para el proyecto, y el
+subdirectorio {\tt test} contiene los casos de prueba para el código en {\tt
+src}. Se puede ver la implementación del código en el repositorio deo proyecto,
+en este se realiaron algunas modificaciones necesarias al archivo {\tt pom.xml}
+que actúa como archivo de configuración de la compilación y el empaquetado de
+las clases. Las modificaciones se muestran en el siguiente listing
+
+\begin{minted}{xml}
+  <!-- ... -->
+  <!-- Acá se tienen más cosas -->
+  <!-- ... -->
+
+  <packaging>jar</packaging>
+
+  <!-- ... -->
+  <!-- Acá se tienen más cosas -->
+  <!-- ... -->
+  <!-- Se importan los artefactos de Hadoop desde el repositorio
+       de Maven -->
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/
+                org.apache.hadoop/hadoop-common -->
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-common</artifactId>
+        <version>2.8.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/
+                org.apache.hadoop/hadoop-mapreduce-client-core -->
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-mapreduce-client-core</artifactId>
+        <version>2.8.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/
+                 org.apache.hadoop/hadoop-core -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-core</artifactId>
+      <version>0.20.2</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+\end{minted}
+
+Con todo esto en orden se puede proceder a la compilación con Maven en una
+simple linea.
+
+\begin{minted}{bash}
+ \$ mvn clean package
+\end{minted}
+
+Esto va a dar como resultado un nuevo directorio que contendrá las partes
+resultantes de la compilación, en la raíz del directorio (con la configuración
+que se tiene en el repositorio mencionado), se va a tener un archivo {\tt
+.jar}, este archivo es el que se utilizará para ejecutar los trabajos en el
+\gls{cluster}
+
+\subsection*{Ejecución del paquete y resultados}
+
+Una vez se finalizan los pasos anteriores, solamente queda ejecutar el paquete
+obtenido sobre la plataforma Hadoop. Para continuar con esto, se asume la existencia de los
+archivos que van a ser el input del Mapper en el directorio {\tt ./pylp/input}.
+Es necesario recalcar que el directorio que funcionará como output no se
+encuentre creado. Con todo esto en su lugar, se procede a ejecutar lo
+implementado de la siguiente manera
+
+\begin{minted}{bash}
+\$ hadoop jar \
+wc.jar \  # Archivo jar con la implementacion de Mapper y Reducer
+WordCount  \ # Clase envoltorio dentro del proyecto
+pylp/input/ \ # Directorio que tiene los inputs
+pylp/output/ # Directorio que funcionará como output
+\end{minted}
 
