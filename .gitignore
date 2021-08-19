@@ -13,4 +13,4 @@
 *.log
 *.out
 *.run.xml
-
+_minted*
