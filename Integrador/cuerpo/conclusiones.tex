@@ -1,9 +1,57 @@
 \section{Conclusiones y Futuros trabajos}
 \label{sec:conclusiones_y_futuros_trabajos}
+El ecosistema alrededor de Hadoop es grande, con proyectos dentro de la
+incubadora de Apache que contribuyen como pequeños bloques de funcionalidad que
+agregan a lo desarrollado aquí, algunos proyectos de trascendencia dentro de este
+ecosistema son Spark, Hive, Pig, HBase, Yarn, ZooKeeper, etc.
+
+Este \gls{framework} crece día a día, por lo que se aclara que este trabajo no
+es una revisión profunda del software en cuestión, ni tampoco se apuntaba a
+serlo, lo presentado es un pequeño vistazo, un vistazo que sirve para
+poner en perspectiva lo que se puede lograr, estableciendo paralelismos con lo
+visto en la cátedra en cuanto al procesamiento paralelo y distribuido.
+
+En los experimentos a lo largo del articulo no se demuestra la
+utildad en un alto volúmen de datos, lo cual {\tt sí} era el punto para este
+trabajo, el brindar un vistazo de cómo el procesamiento distribuido y paralelo,
+teniendo en cuenta estos enfoques de paralelización de datos y funciones, 
+permite que las operaciones sobre grandes volúmenes de datos sean capaces de 
+escalar con el agregado de mas nodos al
+\gls{cluster} (aunque no siempre será la respuesta a un problema, siendo en
+algunas partes su uso es contraproducente, y es notado en la literatura acerca
+del tema), sin embargo, estos experimentos que demuestran esta capacidad
+mencionada pueden ser revisados en la bibliografía listada. Los
+impedimentos que actuaron como barrera para la inclusión estos experimentos a 
+una escala mayor en el presente trabajo tienen que ver con la falta de
+recursos.
+
+Con la falta de recursos en mente, en la siguiente subsección se presenta una
+pequeña propuesta que puede ser de mucha ayuda para los que deseen seguir estudiando
+los sistemas distribuidos y su procesamiento en una escala mayor.
 
 \subsection{Propuesta para futuros trabajos}
 \label{sec:propuesta}
 
-En esta sección se hace mención de una propuesta para la incorporación de un
+En esta sub sección se hace mención de una propuesta para la incorporación de un
 pequeño \gls{cluster} para el estudio y la aplicación de diferentes procesos
 distribuidos.
+
+Uno de los atractivos de estos \glspl{framework} es la capacidad que tienen de
+funcionar en lo que se llama ``comodity hardware'', es decir, una máquina
+modesta es capaz de ser parte del \gls{cluster}. 
+
+Entonces el uso de máquinas
+que se encuentren en deshuso dentro del módulo pueden ser de extrema utilidad
+para alguien que necesite los recursos para la implementación de esta red
+interconectada de máquinas para procesar datos. Aquí no necesariamente se debe
+hablar de Hadoop, o cualquier herramienta mencionada que forme parte del
+ecosistema, sino que se puede generalizar aún más esta situación y se puede
+tratar de poner
+en funcionamiento un \gls{cluster} de cómputo distribuido de código abierto,
+como por ejemplo OpenStack~\footnote{\url{https://www.openstack.org/}}, que
+será de utilidad para un número importante de cátedras\footnote{Arquitectura de
+Computadores, Comunicación y Redes I y II, Sistemas Operativos, Sistemas
+Distribuidos, Paradigmas y Lenguajes de Programación} y será un recurso
+extremadamente importante para el estudiante que se interese por el tema y no
+tenga los recursos para acceder a los equipos o tiempo de computo en
+Google/Amazon/Microsoft.
