@@ -1,0 +1,45 @@
+\section{Hadoop}
+\label{sec:hadoop}
+
+\subsection*{Introducción}
+Apache Hadoop es una herramienta que surge luego de dos grandes contribuciones
+de las que se estuvieron hablando en las secciones anteriores, estas dos son,
+el modelo de programación MapReduce~\cite{dean2004, dean2008}, y
+\acrshort{gfs}~\cite{ghemawat2003}.
+
+Este es un \gls{framework} para Big Data implementado en Java, esta
+implementación consiste de dos capas principales, la primer capa es para
+almacenamiento de datos y 
+maneja un sistema de archivos distribuidos que está basado en \acrshort{gfs}, 
+que se denomina \acrlong{hdfs} (\acrshort{hdfs}), la segunda capa, ataca el
+problema del procesamiento de los datos y se denomina {\it Hadoop MapReduce
+\Gls{framework}}~\cite{lee2012}.
+
+Este \gls{framework} trabaja exclusivamente sobre pares clave valor ({\tt «K,
+V»}), se puede resumir este funcionamiento de la siguiente manera~\cite{}:
+
+\begin{tcolorbox}
+  \centering
+  {\tt input} <k1, k2>$\rightarrow$ {\tt mapper} $\rightarrow$ <k2, v2> $\rightarrow$
+  {\tt reducer} $\rightarrow$ <k3, v3>
+\end{tcolorbox}
+
+\subsection*{Implementación: Mapper y Reducer}
+
+Para demostrar de manera menos abstracta y teórica el funcionamiento del
+framework, ahora se procede a la implementación de un {\it mapper} y un {\it
+reducer} extremadamente sencillos. El propósito del código brindado en este 
+ejemplo es el de contar
+la cantidad de palabras en diferentes archivos distribuidos en el
+\acrshort{hdfs}. En los listings \ref{listing:hadoop_mapper} y
+\ref{listing:hadoop_reducer} se tiene el código respectivo para cada uno de estos. 
+
+La implementación completa (no solamente del mapper y el reducer) se puede encontrar
+en el Anexo: {\bf Implementación sobre HDFS}.
+
+\input{cuerpo/codigo/lst_hadoop_mapper.tex}
+\input{cuerpo/codigo/lst_hadoop_mapper_explicacion.tex}
+\input{cuerpo/codigo/lst_hadoop_reducer.tex}
+\input{cuerpo/codigo/lst_hadoop_reducer_explicacion.tex}
+
+

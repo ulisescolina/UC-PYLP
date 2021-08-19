@@ -1,0 +1,57 @@
+Al igual que en el mapper, acá se inicia prestando atención a la definición de
+la clase {\it Reducer}, en este caso.
+
+\mint{java}|extends Reducer<Text,IntWritable,Text,IntWritable> {|
+
+Al igual que la etapa anterior, el reducer, acepta pares (K2,V2). La diferencia
+es que estos pares, son el resultado de las operaciones realizadas por el 
+{\it Mapper} en el listing \ref{listing:hadoop_mapper}.
+
+\begin{minted}{java}
+public void reduce(Text key, Iterable<IntWritable> values, Context context)
+    throws IOException, InterruptedException {
+
+  int sum = 0;
+  for (IntWritable val : values) {
+    sum += val.get();
+  }
+  result.set(sum);
+  context.write(key, result);
+}
+\end{minted}
+
+Nuevamente, aquí se cuenta con la clave {\tt Text key} y el valor\newline{\tt
+Iterable<IntWritable> values}, este último, posee todas las instancias de una
+clave específica. Para ilustrar este contenido de mejor manera, se presenta un
+ejemplo, aquí se tiene el par,
+
+\begin{tcolorbox}
+\centering
+{\tt (K, V) = (``hadoop'', Iterable [1, 1, 1, 1, 1])}
+\end{tcolorbox}
+
+
+Descomponiendo el ejemplo anterior se tiene lo siguiente, 
+
+\begin{tcolorbox}
+\centering
+{\tt (``hadoop'', 1)} \\
+{\tt (``hadoop'', 1)} \\
+{\tt (``hadoop'', 1)} \\
+{\tt (``hadoop'', 1)}
+\end{tcolorbox}
+
+Estos múltiples pares (K, V) resultaron de la etapa mapper (que se
+recuerda que pueden estar en {\it archivos intermedios} separados en distintos
+nodos), que se unen en la etapa número 5, explicada en la subsección \ref{sssec:reduce}
+{\it Reduce}.
+
+Resumiendo el significado puntual de lo visto en términos simples es,  
+
+\begin{tcolorbox}
+  Iterable<IntWritable> values = {\bf Todos los valores con la clave ``hadoop''}
+\end{tcolorbox}
+
+Recordando que los valores son siempre 1, estos son siempre el mismo valor
+por el problema que se está atacando con el mapper en este ejemplo particular,
+no necesariamente son {\bf siempre} 1 en todos los problemas.

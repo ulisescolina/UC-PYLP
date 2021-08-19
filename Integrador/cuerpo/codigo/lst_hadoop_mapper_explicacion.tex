@@ -1,0 +1,42 @@
+Lo primero a notar con la implementación de la clase creada,
+es el hecho de que extiende de {\tt Mapper}~\cite{apache_hadoop_mapper}. 
+
+\mint{java}|extends Mapper<Object, Text, Text, IntWritable>|
+
+La clase Mapper abstrae dentro del \gls{framework} la distribución de tareas a
+los diferentes nodos en la etapa {\it Map}, esta clase se instancia una vez por
+cada {\it InputSplit}\footnote{Representa el/los datos a ser procesados por un mapper
+individual} \footnote{https://hadoop.apache.org/docs/r2.7.4/api/org/apache/hadoop/mapreduce/InputSplit.html}.
+
+Lo siguiente a prestar atención, es la reimplementación del método {\tt map},
+este método se aplica a cada registro dentro del InputSplit, la funcionalidad
+por defecto es devolver el mismo registro.
+
+\begin{minted}{java}
+public void map(Object key, Text value, Context context) 
+    throws IOException, InterruptedException {
+  StringTokenizer itr = new StringTokenizer(value.toString());
+  while (itr.hasMoreTokens()) {
+    word.set(itr.nextToken());
+    context.write(word, one);
+  }
+}
+\end{minted}
+
+Los primeros dos parametros reiteran lo mencionado anteriormente, el uso de clave-valor
+{\tt (K, V)}. Aquí, {\tt Object key} representa a la clave del InputSplit
+que le toca al mapper instanciado, y de la misma manera, {\tt Text value}
+representa al dato del InputSplit asociado al mapper. Lo que queda pendiente es
+el {\tt Context context}, este permite la comunicación con el resto del {\it sistema
+distribuido}, este objeto contiene información referente a la configuarción del
+trabajo actual, reporte de progreso, mensajes de estado a nivel de aplicación, 
+\glspl{heartbeat}.
+
+La información contenida en {\tt value} se transforma en un iterador, que
+contiene en cada uno de sus elementos a una palabra (para este caso
+particular), al recorrer este iterador, se escribe otro par {\tt (K2, V2)}, la
+clave pasa a ser la palabra, y el contador pasa a ser un numero (1), en un
+ejemplo concreto esto significa que, para el par {\tt (hadoop, 1)} la palabra
+``hadoop'', tiene 1 repetición. Al terminar el recorrido se finaliza con la
+``Emisión'' de estos pares (K2, V2) intermedios. Ahora la etapa {\it Reduce}
+puede acceder a estos pares (K2, V2).
