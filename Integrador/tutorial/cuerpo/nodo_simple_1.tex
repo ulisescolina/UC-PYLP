@@ -1,0 +1,31 @@
+\section{Establecer el JAVA\_HOME}
+\label{sec:establecer_java_home}
+
+Como se menciona en el documento que describe al software
+Hadoop\cite{ramirez2021}, este es una
+herramienta construida en Java, y para su correcto funcionameiento se apoya
+sobre una instalación de la \acrlong{jvm} (\acrshort{jvm}), la forma de
+comunicar a Hadoop cuál es el directorio que contiene la instalación de la
+\acrshort{jvm} es con la variable de entorno {\tt JAVA\_HOME}.
+
+La variable de entorno del sistema que se denomina {\tt JAVA\_HOME} indica cual
+es el directorio en el cual se encuentra instalada la versión de Java que está
+utilizando la máquina. Para revisar si ya se tiene establecida la variable se
+puede realizar lo siguiente: ``{\tt echo \$JAVA\_HOME}''.
+
+Si el resultado de correr lo mencionado anteriormente es un directorio, el
+sistema tiene establecida la variable en cuestión, de lo contrario será
+necesario que se haga manualmente.
+
+\subsection*{JAVA\_HOME}
+Para establecer una nueva variable de entorno en el sistema es suficiente con
+ejecutar 
+
+\begin{lstlisting}[language=bash, caption=Exportar variable de entorno,
+label=lst:exportar_java_home]
+export JAVA_HOME="/usr/lib/jvm/java-10-openjdk/"
+\end{lstlisting}
+
+El valor que debe obtener la variable de entorno va a depender de que versión
+de Java se tenga instalada además de si se tiene la versión que provee la
+empresa Oracle, o si se tiene la versión libre.

@@ -1,0 +1,102 @@
+La instalación de Hadoop es sencilla de realizar, dependiendo de la conexión a
+internet y el grado de cumplimiento de los pre-requisitos se puede tener
+funcionando un ``\gls{cluster}'' de un solo nodo en cuestión de minutos,
+primero vamos a recorrer los pasos necesarios para cumplimentar esto, un
+\gls{cluster} de un solo nodo. Las versiones que posteriores a este documento
+detallarán el procedimiento para la instalación del software en un entorno con
+múltiples nodos.
+
+\section{Obtención del paquete}
+\label{sec:obtencion_del_paquete}
+
+La primer tarea que tenemos que llevar a cabo es la obtención de Hadoop, para
+esto se seguirán las recomendaciones propuestas por los desarrolladores de
+descargar el archivo comprimido de la página oficial
+\footnote{\url{http://www.apache.org/dyn/closer.cgi/hadoop/common/}}. Por el
+momento se asume que el archivo descargado queda almacenado en: \\
+$$\sim/Descargas/hadoop-3.3.1.tar.gz$$
+
+\begin{tcolorbox}
+  {\bf NOTA:} \\ \newline Otra de las formas que se puede obtener una
+  instalación de Hadoop, es a través de los repositorios oficiales de la
+  distribución que se encuentre ejecutando en la máquina. Los repositorios
+  compatibles con Ubuntu tendrán la posibilidad de agregar un PPA y obtener los
+  paquetes necesarios para Hadoop. \\ Más información acerca del repositorio
+  disponible para Ubuntu y derivados (Mint, Debian\footnote{Ubuntu es una
+  derivación de Debian, pero hay veces en donde los paquetes de una
+  distribución no tienen problemas funcionando en la otra, sin embargo, esto no
+  se probó en el caso específico de Hadoop.}) se pueden encontrar en el siguiente
+  enlace:
+  \\ \newline 
+  \url{https://launchpad.net/~hadoop-ubuntu/+archive/ubuntu/stable} 
+  \\ \newline Otras
+  distribuciones (Fedora, RHEL, Manjaro, Gentoo, etc.) deberán buscar en
+  sus repositorios oficiales en caso de querer seguir este acercamiento.
+\end{tcolorbox}
+
+\section{Configuración del entorno}
+\label{sec:configuracion_del_entorno}
+
+Aquí se describen cuestiones que son necesarias con los pre-requisitos, pero
+que tienen que ver más con cuestiones de configuración del Sistema en general.
+Estas cuestiones son de especial importancia si se quiere establecer el entorno
+de acuerdo a las buenas prácticas para la implantación del \gls{cluster} con
+múltiples nodos que actuen como {\it workers}, en este apartado de
+configuración de entorno tendría que procederse a la creación de usuarios específicos
+para el uso del cluster, la generación de claves asíncronas para la conexión con los
+demás nodos del cluster. 
+
+Sin embargo, se omiten estas tareas para poder retomarlas en una versión futura del
+documento, primero nos ocuparemos de tener una versión funcional de Hadoop en
+un nodo.
+
+% \subsection*{Generación de usuario para Hadoop, SSH}
+
+% Este paso es opcional y puede ser omitido por completo si simplemente se
+% pretende utilizar la instalación en una configuración de nodo simple, sin
+% embargo, todo es parte de las buenas prácticas a seguir a la hora de la configuración
+% de este entorno.
+
+% Nuevamente, acá será necesario ir al manual de cada distribución para saber
+% cual es la herramienta que se tiene disponible para indicarle al sistema la
+% creación de un nuevo usuario y un nuevo grupo. Acá un ejemplo con las
+% herramientas que brinda el Ubuntu.
+
+% \begin{lstlisting}[language=bash, caption=Creación de usuario y grupo para
+% hadoop, label=lst:usuario_y_grupo_hadoop]
+% sudo addgroup hadoop  
+% sudo adduser -m --ingroup hadoop hduser
+% \end{lstlisting}
+
+% Con lo visto en el listing \ref{lst:usuario_y_grupo_hadoop} se crea un grupo
+% que se denomina {\tt hadoop}, y se crea un usuario {\tt hduser} que se agrega a
+% ese grupo recién creado. {\bf Importante:} Si se realiza esta parte, se puede 
+% hacer todo teniendo en cuenta al directorio base como {\tt /home/hduser/}, si
+% este paso se ignora se puede realizar el procedimiento desde el usuario por
+% defecto sin problemas.
+
+% Con esto hecho, se procede a cofigurar el servidor SSH que se tiene instalado,
+% para esto se realiza lo siguiente:
+
+% \begin{lstlisting}[language=bash, caption=Configuración de SSH,
+% label=lst:config_ssh]
+% su - hduser   
+% ssh-keygen -t rsa -P ""
+% cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+% \end{lstlisting}
+
+% Al realizar esto, se puede probar acceder a la máquina a través de SSH con: \\
+% {\tt ssh localhost} .
+
+% Ahora se tiene que permitir al usuario creado al inicio de la sección tener
+% permisos de superusuario, para esto se agrega los siguiente al final del archivo {\tt
+% /etc/sudoers} (es necesario abrir este archivo con permisos de superusuario
+% para poder editarlo): 
+
+% \begin{lstlisting}[language=bash, caption=Permisos de superusuario para hduser,
+% label=lst:superusuario_hduser]
+% hduser ALL=(ALL:ALL) ALL
+% \end{lstlisting}
+
+
+

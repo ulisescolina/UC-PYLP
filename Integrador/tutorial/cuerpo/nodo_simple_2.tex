@@ -1,0 +1,71 @@
+\section{Descomprimir el paquete descargado}
+\label{sec:descomprimir_el_paquete_descargado}
+
+Hasta ahora se realizaron configuraciones referentes al entorno en el cual va a
+residir el nodo Hadoop, ahora se retoman las tareas relacionadas con el paquete 
+descargado al inicio.
+
+\begin{lstlisting}[language=bash, caption=Descompresión del paquete Hadoop, 
+label=lst:descompresion_hadoop]
+cd ~/Descargas/              # cambiar de directorio 
+tar -xzf hadoop-3.1.1.tar.gz # descompresion del archivo
+mv hadoop-3.3.1.tar/hadoop-3.1.1/ ~/hadoop/ 
+                # se mueve todo el contenido a ~/hadoop/ 
+\end{lstlisting}
+
+Lo listado anteriormente describe como realizar la descompresión de lo
+descargado en la sección \ref{sec:obtencion_del_paquete}, el primer paso es
+cambiar de directorio hacia donde se encuenra el paquete comprimido, esto se
+había asumido en la sección \ref{sec:obtencion_del_paquete} que es {\tt
+~/Descargas/}, luego se descomprime con la herramienta {\tt tar} (para ver más
+utilidades que proporciona la herramienta se puede ingresar {\tt man tar} en un
+terminal), por último, se mueve el directorio y todo el contenido que resulta de
+la descompresión al directorio {\tt ~/hadoop/}.
+
+\section{Prueba de funcionamiento}
+\label{sec:prueba_de_funcionamiento}
+
+El directorio resultante de la descompresión contiene todo lo necesario para
+ejecutar Hadoop, en este documento nos vamos a enfocar en los contenidos de
+{\tt bin} y los contenidos de {\tt etc}. 
+
+El directorio {bin} contiene todos los puntos de acceso para la herramienta, se
+puede proceder a ejecutar lo siguiente para probar su funcionamiento:
+
+\begin{lstlisting}[language=bash, caption=Prueba de funcionamiento, 
+label=lst:prueba_de_funcionamiento]
+cd ~/hadoop/
+./bin/hadoop
+\end{lstlisting}
+
+Esto debería imprimir una pequeña ayuda acerca del paquete y es la prueba de
+que tenemos funcionando una instalación de Hadoop en el ordenador.
+
+\subsection*{El directorio {\tt etc}}
+
+En este directorio se tienen archivos de configuración o scripts para la
+modificación de valores por defecto utilizados dentro de Hadoop. Un ejemplo de
+esto y que ya se vió anteriormente es el establecimiento de la variable de 
+entorno {\tt JAVA\_HOME}, si se revisa el archivo {\tt hadoop-env.sh} se podrá
+encontrar parte de lo escrito con anterioridad para establecer la variable
+JAVA\_HOME.
+
+Una de las notas en el documento que es de interés es la siguiente:
+
+\begin{tcolorbox}
+  {\tt
+    Technically, the only required environment variable is JAVA\_HOME.
+    All others are optional.  However, the defaults are probably not 
+    preferred.  Many sites configure these options outside of Hadoop,
+    such as in /etc/profile.d
+  }
+\end{tcolorbox}
+
+Esta da la pauta de que la configuración adecuada puede ser parte de un
+proceso que se tiene que adaptar a cada usuario, por lo que se tienen opciones
+por defecto, sin embargo, estas pueden no ser las adecuadas. Para el ejercicio
+que se realiza a lo largo del presente, se utilizan todos los valores por
+defecto por el hecho de que se esta configurando un nodo simple a modo de
+ejemplificación.
+
+En versiones futuras del documento se planea continuar profundizando este asunto.
