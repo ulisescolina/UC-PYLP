@@ -1,22 +1,24 @@
 \section{Pre-Requisitos}
 \label{sec:prerequisitos}
 
-Los pre-requisitos para poder realizar seguir el paso a paso serán los
-siguientes:
+Los pre-requisitos para poder realizar el tutorial que se describe en este
+documento serán los siguientes:
 
 \begin{enumerate}
 \item {\bf GNU/Linux:} Es necesario tener instalada alguna distribución
-GNU/Linux, este es el sistema de-facto para desarrollo y producción
-de Hadoop, el mismo se probó en producción con clusters de mas de
-2000 nodos, y aunque se puede instalar el mismo en una máquina con
-Windows\footnote{https://cwiki.apache.org/confluence/display/HADOOP2/Hadoop2OnWindows},
-este procedimiento no se cubre en el documento.
+    GNU/Linux, este es el sistema de-facto para desarrollo y producción
+    de Hadoop, el mismo se probó en producción con clusters de más de
+    2000 nodos, y aunque se puede instalar el mismo en una máquina con
+    Windows\footnote{https://cwiki.apache.org/confluence/display/HADOOP2/Hadoop2OnWindows},
+    este procedimiento no se cubre en el documento.
 \item {\bf Java:} Hadoop requiere que el sistema tenga instalada una versión de
-Java, la versión de java dependerá de la versión de Hadoop, para descubrir cual
-versión es la recomendada, se puede ver las versiones.
-compatibles\footnote{\url{https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions}}
+    Java, la versión de java dependerá de la versión de Hadoop, para descubrir cual
+    versión es la recomendada, se puede ver las versiones
+    compatibles\footnote{\url{https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions}}.
+    En este ejemplo no se está utilizando una versión oficial de Oracle, se está
+    utilizando una versión libre, {\it OpenJDK 10.0.2}.
 \item {\bf ssh:} Esta herramienta para el acceso remoto a equipos de una red
-determinada debe estar instalada para que la versión
-pseudo-distribuida y distribuida de Hadoop pueda establecer comunicación
-inter-nodos (o inter-procesos para la versión pseudo-distribuida).
+    determinada debe estar instalada para que la versión
+    pseudo-distribuida y distribuida de Hadoop pueda establecer comunicación
+    inter-nodos (o inter-procesos para la versión pseudo-distribuida).
 \end{enumerate}
